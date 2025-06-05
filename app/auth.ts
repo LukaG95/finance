@@ -3,6 +3,8 @@ import Credentials from 'next-auth/providers/credentials';
 import { compare } from 'bcrypt-ts';
 import { getUser } from 'lib/mongodb';
 import { authConfig } from 'app/auth.config';
+import { MongoDBAdapter } from "@auth/mongodb-adapter"
+import clientPromise from "@/lib/mongodb"
 
 export const {
   handlers: { GET, POST },
@@ -11,6 +13,7 @@ export const {
   signOut,
 } = NextAuth({
   ...authConfig,
+  adapter: MongoDBAdapter(clientPromise),
   providers: [
     Credentials({
       async authorize({ email, password }: any) {
