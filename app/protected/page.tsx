@@ -1,7 +1,7 @@
 import { auth, signOut } from 'app/auth';
 
 export default async function ProtectedPage() {
-  let session = await auth();
+  const session = await auth();
   console.log('session123', session)
 
   return (
