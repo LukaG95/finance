@@ -9,19 +9,6 @@ export const authConfig = {
     // while this file is also used in non-Node.js environments
   ],
   callbacks: {
-    authorized({ auth, request }) {
-      const nextUrl = request?.nextUrl;
-      const pathname = nextUrl?.pathname ?? '';
-
-      const isLoggedIn = !!auth?.user;
-      const isOnDashboard = pathname.startsWith('/protected');
-
-      if (isOnDashboard) {
-        return isLoggedIn;
-      }
-
-      return true;
-    } 
 
   },
 } satisfies NextAuthConfig;
