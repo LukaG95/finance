@@ -1,0 +1,15 @@
+{
+  "extends": ["next", "next/core-web-vitals", "plugin:@typescript-eslint/recommended"],
+  "plugins": ["@typescript-eslint"],
+  "rules": {
+    // Allow explicit any ONLY when you explicitly disable it inline
+    "@typescript-eslint/no-explicit-any": "warn",
+
+    // Good style rules (you can tweak if needed)
+    "prefer-const": "warn",
+    "no-var": "warn",
+    "no-unused-vars": "warn",
+    "@typescript-eslint/no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }],
+
+  }
+}
