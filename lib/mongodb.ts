@@ -5,7 +5,6 @@ import { User } from "types/user";
 const uri = process.env.MONGODB_URI!;
 const options = { appName: "finance" };
 
-// eslint-disable-next-line no-var
 declare global {
   // Allow global caching in dev mode
   var _mongoClientPromise: Promise<MongoClient> | undefined;
