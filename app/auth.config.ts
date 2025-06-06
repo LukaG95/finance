@@ -8,12 +8,12 @@ export const authConfig = {
     // added later in auth.ts since it requires bcrypt which is only compatible with Node.js
     // while this file is also used in non-Node.js environments
   ],
-  callbacks: {
+  /* callbacks: {
     authorized({ auth, request }) {
       //console.log(auth, request)
       return true;
     
-     /*  let isLoggedIn = !!auth?.user;
+      let isLoggedIn = !!auth?.user;
       let isOnDashboard = nextUrl.pathname.startsWith('/protected');
 
       if (isOnDashboard) {
@@ -23,7 +23,7 @@ export const authConfig = {
         return Response.redirect(new URL('/protected', nextUrl));
       }
 
-      return true; */
+      return true;
     },
-  },
+  }, */
 } satisfies NextAuthConfig;

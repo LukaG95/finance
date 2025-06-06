@@ -5,8 +5,7 @@ import { User } from "types/user";
 const uri = process.env.MONGODB_URI!;
 const options = { appName: "finance" };
 
-let clientPromise: Promise<MongoClient>;
-
+// eslint-disable-next-line no-var
 declare global {
   // Allow global caching in dev mode
   var _mongoClientPromise: Promise<MongoClient> | undefined;
@@ -17,7 +16,7 @@ if (!global._mongoClientPromise) {
   global._mongoClientPromise = client.connect();
 }
 
-clientPromise = global._mongoClientPromise;
+const clientPromise: Promise<MongoClient> = global._mongoClientPromise;
 
 export default clientPromise;
 

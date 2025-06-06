@@ -26,7 +26,7 @@ export default function Login() {
               });
             } catch(err){
               result.error = "error"
-              console.log("login error");
+              console.log(err, "login error");
             }
       
             if (!result?.error) {

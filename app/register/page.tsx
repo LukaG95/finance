@@ -1,15 +1,15 @@
 import Link from 'next/link';
 import { Form } from 'app/form';
-import { redirect } from 'next/navigation';
+//import { redirect } from 'next/navigation';
 import { createUser, getUser } from 'lib/mongodb';
 import { SubmitButton } from 'app/submit-button';
 
 export default function Register() {
   async function register(formData: FormData) {
     'use server';
-    let email = formData.get('email') as string;
-    let password = formData.get('password') as string;
-    let user = await getUser(email);
+    const email = formData.get('email') as string;
+    const password = formData.get('password') as string;
+    const user = await getUser(email);
 
     if (user) {
       return 'User already exists'; // TODO: Handle errors with useFormStatus
