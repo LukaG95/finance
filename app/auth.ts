@@ -3,17 +3,18 @@ import Credentials from 'next-auth/providers/credentials';
 import { compare } from 'bcrypt-ts';
 import { getUser } from 'lib/mongodb';
 import { authConfig } from 'app/auth.config';
-import { MongoDBAdapter } from "@auth/mongodb-adapter"
-import clientPromise from "@/lib/mongodb"
+//import { MongoDBAdapter } from "@auth/mongodb-adapter"
+//import client from '@/lib/mongodb';
 
 export const {
-  handlers,
+  handlers: { GET, POST },
   auth,
   signIn,
   signOut,
 } = NextAuth({
   ...authConfig,
-  adapter: MongoDBAdapter(clientPromise),
+  //adapter: MongoDBAdapter(client),
+  debug: true,
   providers: [
     Credentials({
       async authorize({ email, password }: any) {
@@ -22,9 +23,10 @@ export const {
         
         const passwordsMatch = await compare(password, user.password);
         if (!passwordsMatch) return null;
-        
+        console.log("iser", user)
         return user;
       },
     }),
   ],
+
 });
