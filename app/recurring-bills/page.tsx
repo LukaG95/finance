@@ -1,8 +1,12 @@
 import { auth, signOut } from 'app/auth';
+import { redirect } from 'next/navigation';
 
-export default async function ProtectedPage() {
+export default async function Recurring() {
   const session = await auth();
-  console.log('session123', session)
+
+   if (!session?.user) {
+    redirect('/login');
+  }
 
   return (
     <div className="flex h-screen bg-black">
