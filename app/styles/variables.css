@@ -2,14 +2,14 @@
 
 @font-face {
   font-family: 'Public Sans';
-  src: url('/fonts/static/PublicSans-VariableFont_wght.ttf') format('truetype');
+  src: url('/fonts/PublicSans-VariableFont_wght.ttf') format('truetype');
   font-weight: 100 900;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Public Sans';
-  src: url('/fonts/static/PublicSans-Italic-VariableFont_wght.ttf') format('truetype');
+  src: url('/fonts/PublicSans-Italic-VariableFont_wght.ttf') format('truetype');
   font-weight: 100 900;
   font-style: italic;
 }

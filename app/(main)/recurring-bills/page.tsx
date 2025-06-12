@@ -1,7 +1,7 @@
 import { auth, signOut } from '@/lib/auth';
 import { redirect } from 'next/navigation';
 
-export default async function Recurring() {
+export default async function RecurringBills() {
   const session = await auth();
 
    if (!session?.user) {
