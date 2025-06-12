@@ -1,4 +1,4 @@
-import { auth, signOut } from 'app/auth';
+import { auth, signOut } from '@/lib/auth';
 import { redirect } from 'next/navigation';
 
 export default async function Recurring() {

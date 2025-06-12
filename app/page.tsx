@@ -1,11 +1,9 @@
-import Link from 'next/link';
+import { Card } from "@/components/ui/Card";
 
 export default function Home() {
   return (
-    <div>
-      <Link href="/login" className="font-semibold text-gray-800">
-        Login page
-      </Link>
+    <div className='bg-white pl-500'>
+      test
     </div>
   );
 }
