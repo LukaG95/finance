@@ -2,8 +2,8 @@
 
 export default function Home() {
   return (
-    <div className='bg-white pl-500'>
-      test
-    </div>
+    <main className='bg-white pl-500'>
+      Overview page
+    </main>
   );
 }

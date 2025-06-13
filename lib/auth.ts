@@ -3,7 +3,7 @@ import Google from "next-auth/providers/google"
 import Credentials from 'next-auth/providers/credentials';
 import { compare } from 'bcrypt-ts';
 import { getUser } from 'lib/mongodb';
-import { authConfig } from 'app/auth.config';
+import { authConfig } from '@/app/(auth)/auth.config';
 import { MongoDBAdapter } from "@auth/mongodb-adapter"
 import client from '@/lib/mongodb';
 
