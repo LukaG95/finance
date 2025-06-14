@@ -1,23 +1,20 @@
-import { auth, signOut } from '@/lib/auth';
-import { redirect } from 'next/navigation';
+/* import { auth, signOut } from '@/lib/auth';
+import { redirect } from 'next/navigation'; */
 
 export default async function RecurringBills() {
-  const session = await auth();
+  /* const session = await auth();
 
    if (!session?.user) {
     redirect('/login');
-  }
+  } */
 
   return (
-    <div className="flex h-screen bg-black">
-      <div className="w-screen h-screen flex flex-col space-y-5 justify-center items-center text-white">
-        You are logged in as {session?.user?.email}
-        <SignOut />
-      </div>
+    <div>
+      Recurring bills page
     </div>
   );
 }
-
+/* 
 function SignOut() {
   return (
     <form
@@ -29,4 +26,4 @@ function SignOut() {
       <button type="submit">Sign out</button>
     </form>
   );
-}
+} */
