@@ -15,7 +15,7 @@ export default function Sidebar() {
 
   return (
     <aside
-      className={`text-preset-3 flex flex-col justify-between gap-300 pb-300 h-[100%] bg-grey-900 rounded-r-[16px] transition-all duration-300 ${
+      className={`text-preset-3 flex flex-col justify-between gap-300 pb-300 h-full bg-grey-900 rounded-r-[16px] transition-all duration-300 shrink-0 ${
         collapsed ? 'w-[88px]' : 'w-[300px]'
       }`}
     >
@@ -30,7 +30,6 @@ export default function Sidebar() {
             collapsed ? 'opacity-0' : 'opacity-100'
           }`}
         />
-   
         <Image
           src="/images/logo-small.svg"
           alt="Logo small"
@@ -43,7 +42,7 @@ export default function Sidebar() {
         />
       </div>
 
-      <div className={`h-full flex flex-col gap-[4px] transition-padding duration-300 ${collapsed ? 'pr-100' : 'pr-300'}`}>
+      <div className={`rounded-r-[12px] h-full flex flex-col gap-[4px] transition-padding duration-300 ${collapsed ? 'pr-100' : 'pr-300'}`}>
         {sidebarLinks.map((link) => (
           <Link href={link.href} key={link.href}>
             <SidebarButton

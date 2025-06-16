@@ -7,18 +7,24 @@ export async function middleware(request: NextRequest) {
   const isLoggedIn = !!token;
 
   const isLoginPage = request.nextUrl.pathname === '/login';
+  const isRegisterPage = request.nextUrl.pathname === '/register';
 
-  if (!isLoggedIn && !isLoginPage) {
+  // If not logged in and trying to access a protected page (not login/register)
+  if (!isLoggedIn && !isLoginPage && !isRegisterPage) {
+    console.log("Redirecting to /login due to not logged in.");
     return NextResponse.redirect(new URL('/login', request.url));
   }
 
-  if (isLoggedIn && isLoginPage) {
+  // If logged in and trying to access login/register page
+  if (isLoggedIn && (isLoginPage || isRegisterPage)) {
+    console.log("Redirecting to / due to being logged in.");
     return NextResponse.redirect(new URL('/', request.url));
   }
 
+  // Allow the request to proceed
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ['/((?!_next/static|_next/image|favicon.ico).*)'],
+  matcher: ['/((?!api/auth|_next/static|_next/image|favicon.ico).*)'],
 };

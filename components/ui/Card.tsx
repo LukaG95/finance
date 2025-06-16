@@ -1,16 +1,27 @@
 'use client';
 
-export function Card({
-  children,
-  className,
-}: {
+import React from 'react';
+import clsx from 'clsx';
+
+type CardProps = {
   children: React.ReactNode;
   className?: string;
-}) {
+  variant?: 'light' | 'dark'; 
+};
 
+export default function Card({ children, className = '', variant = 'light' }: CardProps) {
   return (
-    <div className='bg-white rounded-cardRadius p-cardPadding'>
-      { children }
+    <div
+      className={clsx(
+        'w-full',
+        'text-grey-900',
+        'p-300',
+        'rounded-[12px]',
+        variant === 'light' ? 'bg-white' : 'bg-grey-900 text-white',
+        className
+      )}
+    >
+      {children}
     </div>
   );
 }

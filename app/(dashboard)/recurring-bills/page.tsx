@@ -1,12 +1,13 @@
-/* import { auth, signOut } from '@/lib/auth';
-import { redirect } from 'next/navigation'; */
+import { auth, signOut } from '@/lib/auth';
+import { redirect } from 'next/navigation';
 
 export default async function RecurringBills() {
-  /* const session = await auth();
+  const session = await auth();
 
+  console.log("session", session)
    if (!session?.user) {
     redirect('/login');
-  } */
+  }
 
   return (
     <div>

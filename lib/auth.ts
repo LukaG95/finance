@@ -13,9 +13,10 @@ export const {
   signIn,
   signOut,
 } = NextAuth({
-  ...authConfig,
+  //...authConfig,
   adapter: MongoDBAdapter(client),
   debug: true,
+  secret: process.env.NEXTAUTH_SECRET,
   session: {
     strategy: 'jwt',
   },
@@ -36,5 +37,6 @@ export const {
       },
     }),
   ],
-
 });
+
+

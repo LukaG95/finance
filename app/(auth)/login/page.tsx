@@ -42,7 +42,7 @@ export default function Login() {
         <form
           action={async () => {
             'use server';
-            await signIn('google');
+            await signIn("google", { callbackUrl: "/" });
           }}
         >
           <button
