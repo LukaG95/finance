@@ -11,7 +11,7 @@ export default function RootLayout({
       <head>
         <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png"></link>
       </head>
-      <body className='flex bg-beige-100 h-full'>
+      <body className='bg-beige-100 h-full'>
         {children}
       </body>
     </html>

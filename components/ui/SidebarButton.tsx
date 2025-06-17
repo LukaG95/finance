@@ -1,5 +1,8 @@
 'use client';
 
+import useWindowDimensions from 'hooks/useWindowDimentions';
+
+
 type SidebarButtonProps = {
   height: string;
   width: string;
@@ -24,23 +27,28 @@ export default function SidebarButton({
   extraMargin = '',
   active = false
 }: SidebarButtonProps) {
-
+  const { s_width } = useWindowDimensions();
   return (
-    <div
+    <button
       onClick={onClick}
-      className={`relative group px-400 py-200 ${active && "bg-beige-100"} transition-colors duration-300 cursor-pointer ${extraMargin} rounded-r-[12px]`}
+      className={`
+        relative group py-200 transition-colors duration-300 cursor-pointer lg:w-full w-[104px] lg:px-400 lg:rounded-r-[12px] rounded-t-[8px]  overflow-hidden
+        ${active ? 'bg-beige-100' : ''}
+        ${extraMargin}
+     
+      `}
     >
       {
         <div
           className={`
-            absolute h-full w-50 bg-green top-0 left-0 
-            transition-opacity duration-300
+            absolute h-50 w-full bg-green bottom-0 left-0 lg:w-50 lg:h-full 
+            transition-opacity duration-300 
             ${active ? 'opacity-100' : 'opacity-0'}
           `}
         ></div>
       }
-      <button className="relative flex transition-all duration-300 cursor-pointer">
-        <div className="w-[24px] h-[24px] flex items-center justify-center shrink-0">
+      <div className="relative flex flex-col transition-all duration-300 cursor-pointer lg:flex-row m-auto">
+        <div className="w-[24px] h-[24px] flex items-center self-center justify-center shrink-0">
           <svg
             style={{width: width, height: height}}
             className={`${active ? 'text-green' : 'text-grey-300 group-hover:text-grey-100'} transition-transform duration-300 ${imageClassName}`}
@@ -53,7 +61,8 @@ export default function SidebarButton({
         {text && (
           <span
             className={`
-              transition-opacity duration-300 ml-200 whitespace-nowrap
+              transition-opacity duration-300 mt-[4px] lg:mt-0 lg:ml-200 whitespace-nowrap
+              ${s_width < 1060 ? 'text-preset-5' : 'text-preset-3'}
               ${showText ? 'opacity-100' : 'opacity-0'}
               text-grey-300 ${active ? 'text-grey-900' : 'group-hover:text-grey-100'}
             `}
@@ -61,7 +70,7 @@ export default function SidebarButton({
             {text}
           </span>
         )}
-      </button>
-    </div>
+      </div>
+    </button>
   );
 }
