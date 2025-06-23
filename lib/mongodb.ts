@@ -6,6 +6,7 @@ if (!process.env.MONGODB_URI) {
   throw new Error('Invalid/Missing environment variable: "MONGODB_URI"')
 }
 
+console.log("node env is:", process.env.NODE_ENV)
 const dbName = process.env.NODE_ENV === 'production' ? 'finance' : 'finance-test';
 
 const uri = process.env.MONGODB_URI
