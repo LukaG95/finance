@@ -16,7 +16,7 @@ export default function Card({ children, className = '', variant = 'light' }: Ca
         'w-full',
         'text-grey-900',
         'p-300',
-        'rounded-[12px]',
+        'rounded-xl',
         variant === 'light' ? 'bg-white' : 'bg-grey-900 text-white',
         className
       )}

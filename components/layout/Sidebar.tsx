@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import SidebarButton from '../ui/SidebarButton';
 import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/navigation';

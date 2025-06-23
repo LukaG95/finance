@@ -40,8 +40,8 @@ export async function getUser(email: string) {
   return db.collection<User>("users").findOne({ email });
 }
 
-export async function createUser(email: string, password: string) {
+export async function createUser(name: string, email: string, password: string) {
   const db = client.db(dbName);
   const hashedPassword = await bcrypt.hash(password, 10);
-  return db.collection("users").insertOne({ email, password: hashedPassword });
+  return db.collection("users").insertOne({ name, email, password: hashedPassword });
 }
