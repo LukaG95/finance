@@ -43,7 +43,7 @@ export default function LoginPage() {
         }}
       >
 
-        <SubmitButton className="mb-100">Login with google</SubmitButton>
+        <SubmitButton className="mb-100">Login with Google</SubmitButton>
       </form>
 
       <GuestLoginButton />
