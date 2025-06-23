@@ -9,8 +9,8 @@ export async function middleware(request: NextRequest) {
   const isLoginPage = request.nextUrl.pathname === '/login';
   const isRegisterPage = request.nextUrl.pathname === '/register';
 
-  console.log("test", isLoggedIn, isLoginPage, isRegisterPage)
-  console.log("token", token)
+  console.log("COOKIES", request.cookies.getAll());
+console.log("TOKEN", await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET }));
 
 
   // If not logged in and trying to access a protected page (not login/register)
