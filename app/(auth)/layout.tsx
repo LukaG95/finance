@@ -5,7 +5,7 @@ export default function AuthLayout({ children }: { children: ReactNode }) {
   return (
     <div className="flex flex-col lg:flex-row h-full w-full">
       {/* Aside: Top on mobile, left on desktop */}
-      <aside className="w-full bg-grey-900 lg:bg-transparent lg:basis-9/30 min-w-[450px] py-300 lg:p-250 rounded-b-[8px]">
+      <aside className="w-full bg-grey-900 lg:bg-transparent lg:basis-9/30 lg:min-w-[450px] py-300 lg:p-250 rounded-b-[8px]">
 
         {/* Mobile: Logo only */}
         <div className="block lg:hidden mb-0 lg:mb-400">
