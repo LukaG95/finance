@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Form } from '@/components/ui/test';
+import { Form } from '@/components/ui/Form';
 import { createUser, getUser } from '@/lib/mongodb';
 import { SubmitButton } from '@/components/ui/SubmitButton';
 
