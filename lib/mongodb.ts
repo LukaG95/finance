@@ -5,12 +5,11 @@ import { MongoClient, ServerApiVersion } from "mongodb"
 if (!process.env.MONGODB_URI) {
   throw new Error('Invalid/Missing environment variable: "MONGODB_URI"')
 }
-console.log("haha")
-if (process.env.VERCEL_ENV) console.log("hehe")
-else console.log("hihi")
-console.log(process.env.VERCEL_ENV, "hoho")
-console.log("node env is:", process.env.NODE_ENV)
-const dbName = process.env.NODE_ENV === 'production' ? 'finance' : 'finance-test';
+const isProd = process.env.VERCEL_ENV === 'production';
+const isDev = process.env.VERCEL_ENV === 'development';
+const isPreview = process.env.VERCEL_ENV === 'preview';
+
+const dbName = isProd ? 'finance' : 'finance-test';
 
 const uri = process.env.MONGODB_URI
 const options = {
@@ -23,7 +22,7 @@ const options = {
  
 let client: MongoClient
  
-if (process.env.NODE_ENV === "development") {
+if (isDev || isPreview) {
   var globalWithMongo = global as typeof globalThis & {
     _mongoClient?: MongoClient
   }
