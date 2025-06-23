@@ -12,7 +12,7 @@ export default function RegisterPage() {
 
     const user = await getUser(email);
     if (!user) {
-      await createUser(email, password, name); 
+      await createUser(name, email, password); 
     } else {
       return 'User already exists';
     }
