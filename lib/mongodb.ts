@@ -8,6 +8,7 @@ if (!process.env.MONGODB_URI) {
 console.log("haha")
 if (process.env.VERCEL_ENV) console.log("hehe")
 else console.log("hihi")
+console.log(process.env.VERCEL_ENV, "hoho")
 console.log("node env is:", process.env.NODE_ENV)
 const dbName = process.env.NODE_ENV === 'production' ? 'finance' : 'finance-test';
 
