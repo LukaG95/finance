@@ -9,6 +9,10 @@ export async function middleware(request: NextRequest) {
   const isLoginPage = request.nextUrl.pathname === '/login';
   const isRegisterPage = request.nextUrl.pathname === '/register';
 
+  console.log("test", isLoggedIn, isLoginPage, isRegisterPage)
+  console.log("token", token)
+
+
   // If not logged in and trying to access a protected page (not login/register)
   if (!isLoggedIn && !isLoginPage && !isRegisterPage) {
     console.log("Redirecting to /login due to not logged in.");
