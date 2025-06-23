@@ -5,7 +5,9 @@ import { MongoClient, ServerApiVersion } from "mongodb"
 if (!process.env.MONGODB_URI) {
   throw new Error('Invalid/Missing environment variable: "MONGODB_URI"')
 }
-console.log("test321:", process.env.VERCEL_ENV ?? 'undefined');
+console.log("haha")
+if (process.env.VERCEL_ENV) console.log("hehe")
+else console.log("hihi")
 console.log("node env is:", process.env.NODE_ENV)
 const dbName = process.env.NODE_ENV === 'production' ? 'finance' : 'finance-test';
 
