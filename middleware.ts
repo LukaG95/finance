@@ -30,6 +30,6 @@ console.log("TOKEN", await getToken({ req: request, secret: process.env.NEXTAUTH
 }
 
 export const config = {
-  matcher: ['/((?!api|_next|favicon.ico|images).*)'],
+  matcher: ["/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)"],
   //matcher: ['/((?!api/auth|_next/static|_next/image|favicon.ico|images).*)'],
 };
