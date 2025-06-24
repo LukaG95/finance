@@ -3,16 +3,12 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 export async function middleware(request: NextRequest) {
-  const token = await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET, secureCookie: true });
+  const token = await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET, secureCookie: process.env.VERCEL_ENV !== 'local' });
   const isLoggedIn = !!token;
 
 console.log('NEXTAUTH_SECRET', process.env.NEXTAUTH_SECRET, process.env.NEXTAUTH_URL);
   const isLoginPage = request.nextUrl.pathname === '/login';
   const isRegisterPage = request.nextUrl.pathname === '/register';
-
-  console.log("COOKIES", request.cookies.getAll());
-console.log("TOKEN", await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET }));
-
 
   // If not logged in and trying to access a protected page (not login/register)
   if (!isLoggedIn && !isLoginPage && !isRegisterPage) {
