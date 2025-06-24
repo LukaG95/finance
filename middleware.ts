@@ -27,6 +27,5 @@ console.log('NEXTAUTH_SECRET', process.env.NEXTAUTH_SECRET, process.env.NEXTAUTH
 }
 
 export const config = {
-  matcher: ['/((?!api|_next|images|favicon.ico|login|register).*)'],
-  //matcher: ['/((?!api/auth|_next/static|_next/image|favicon.ico|images).*)'],
+  matcher: ['/((?!api/auth|_next/static|_next/image|favicon.ico|images).*)'],
 };
