@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
 export async function middleware(request: NextRequest) {
-  const token = await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET });
+  const token = await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET, secureCookie: true });
   const isLoggedIn = !!token;
 
 console.log('NEXTAUTH_SECRET', process.env.NEXTAUTH_SECRET, process.env.NEXTAUTH_URL);
