@@ -6,8 +6,6 @@ if (!process.env.MONGODB_URI) {
   throw new Error('Invalid/Missing environment variable: "MONGODB_URI"')
 }
 const isProd = process.env.VERCEL_ENV === 'production';
-const isDev = process.env.VERCEL_ENV === 'development';
-const isPreview = process.env.VERCEL_ENV === 'preview';
 
 const dbName = isProd ? 'finance' : 'finance-test';
 
@@ -22,7 +20,7 @@ const options = {
  
 let client: MongoClient
  
-if (isDev || isPreview) {
+if (!isProd) {
   var globalWithMongo = global as typeof globalThis & {
     _mongoClient?: MongoClient
   }
