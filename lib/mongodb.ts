@@ -38,7 +38,9 @@ export default client
 
 export async function getUser(email: string) {
   const db = client.db(dbName);
-  return db.collection<User>("users").findOne({ email });
+  const user = db.collection<User>("users").findOne({ email });
+
+  return user;
 }
 
 export async function createUser(name: string, email: string, password: string) {

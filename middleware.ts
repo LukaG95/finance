@@ -6,7 +6,6 @@ export async function middleware(request: NextRequest) {
   const token = await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET, secureCookie: process.env.VERCEL_ENV !== 'local' });
   const isLoggedIn = !!token;
 
-console.log('NEXTAUTH_SECRET', process.env.NEXTAUTH_SECRET, process.env.NEXTAUTH_URL);
   const isLoginPage = request.nextUrl.pathname === '/login';
   const isRegisterPage = request.nextUrl.pathname === '/register';
 
