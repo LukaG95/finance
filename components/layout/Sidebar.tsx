@@ -23,30 +23,30 @@ export default function Sidebar() {
         ${collapsed ? 'lg:w-[88px]' : 'lg:w-[300px]'} w-full
       `}
     >
-      {s_width > 1060 && (
-        <div className="relative px-400 py-500 mb-300">
-          <Image
-            src="/images/logo-large.svg"
-            alt="Logo large"
-            width={121}
-            height={21.5}
-            onClick={() => router.push('/')}
-            className={`absolute transition-opacity duration-300 cursor-pointer ${
-              collapsed ? 'opacity-0' : 'opacity-100'
-            }`}
-          />
-          <Image
-            src="/images/logo-small.svg"
-            alt="Logo small"
-            width={13.7}
-            height={21.5}
-            onClick={() => router.push('/')}
-            className={`absolute transition-all duration-300 cursor-pointer ${
-              collapsed ? 'opacity-100 translate-x-[5px]' : 'opacity-0 translate-x-[0px]'
-            }`}
-          />
-        </div>
-      )}
+
+      <div className="relative px-400 py-500 mb-300 hidden lg:block">
+        <Image
+          src="/images/logo-large.svg"
+          alt="Logo large"
+          width={121}
+          height={21.5}
+          onClick={() => router.push('/')}
+          className={`absolute transition-opacity duration-300 cursor-pointer ${
+            collapsed ? 'opacity-0' : 'opacity-100'
+          }`}
+        />
+        <Image
+          src="/images/logo-small.svg"
+          alt="Logo small"
+          width={13.7}
+          height={21.5}
+          onClick={() => router.push('/')}
+          className={`absolute transition-all duration-300 cursor-pointer ${
+            collapsed ? 'opacity-100 translate-x-[5px]' : 'opacity-0 translate-x-[0px]'
+          }`}
+        />
+      </div>
+
 
       <div className={`rounded-r-[12px] h-full flex flex-row justify-between lg:justify-normal gap-[4px] transition-padding duration-300 ${collapsed ? 'pr-100' : 'pr-300'} lg:flex-col`}>
         {sidebarLinks.map((link) => (
