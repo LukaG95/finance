@@ -1,17 +1,22 @@
-import { auth } from '@/lib/auth';
-import { redirect } from 'next/navigation';
+import { Suspense } from 'react';
+import Header from '@/components/layout/Header';
+import TransactionTableWrapper from './TransactionTableWrapper';
+import Loading from './loading';
+import AddTransactionModal from '@/components/transactions/AddTransactionModal';
 
-export default async function Transactions() {
-  const session = await auth();
-
-  console.log("session", session)
-   if (!session?.user) {
-    redirect('/login');
-  }
-
+export default function TransactionsPage({ searchParams }: { searchParams: { page?: string } }) {
   return (
-    <div>
-      Transactions page
+    <div className='flex flex-col gap-400 pb-400'>
+      <Header>
+        <h1 className='text-preset-1 text-grey-900'>Transactions</h1>
+        <div className="absolute right-0 bottom-0 flex gap-200 items-center h-full">
+          <AddTransactionModal />
+        </div>
+      </Header>
+
+      <Suspense fallback={<Loading />}>
+        <TransactionTableWrapper searchParams={searchParams}/>
+      </Suspense>
     </div>
   );
 }

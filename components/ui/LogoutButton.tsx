@@ -25,7 +25,6 @@ export default function LogoutButton() {
         ${loading ? 'opacity-70 cursor-not-allowed' : ''}
       `}
     >
-
       <Image
         src="/images/icon-logout.svg"
         alt="logout"
