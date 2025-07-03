@@ -48,7 +48,7 @@ export default function Sidebar() {
       </div>
 
 
-      <div className={`rounded-r-[12px] h-full flex flex-row justify-between lg:justify-normal gap-[4px] transition-padding duration-300 ${collapsed ? 'pr-100' : 'pr-300'} lg:flex-col`}>
+      <div className={`rounded-r-[12px] h-full flex flex-row justify-between lg:justify-normal gap-[4px] transition-padding duration-300 ${collapsed && s_width >= 1060 ? 'pr-100' : s_width >=1060 && 'pr-300'} lg:flex-col`}> 
         {sidebarLinks.map((link) => (
           <Link href={link.href} key={link.href}>
             <SidebarButton

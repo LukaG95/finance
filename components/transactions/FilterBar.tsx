@@ -1,8 +1,9 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Image from 'next/image';
+import DropdownButton from '../ui/DropdownButton';
 
 const SORT_OPTIONS = ['Latest', 'Oldest', 'A to Z', 'Z to A', 'Highest', 'Lowest'];
 const CATEGORY_OPTIONS = [
@@ -11,12 +12,6 @@ const CATEGORY_OPTIONS = [
 ];
 
 export default function FilterBar() {
-  const [sortOpen, setSortOpen] = useState(false);
-  const [categoryOpen, setCategoryOpen] = useState(false);
-
-  const sortRef = useRef<HTMLDivElement>(null);
-  const categoryRef = useRef<HTMLDivElement>(null);
-
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -25,118 +20,65 @@ export default function FilterBar() {
 
   const updateParam = (key: string, value: string) => {
     const params = new URLSearchParams(searchParams.toString());
-    params.set(key, value);
+
+    if (value.trim() === '') {
+      params.delete(key);
+    } else {
+      params.set(key, value);
+    }
+
+    // Always reset to page 1 when a filter changes
+    if (key !== 'page') {
+      params.set('page', '1');
+    }
+
     router.replace(`?${params.toString()}`);
   };
-
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      const target = event.target as Node;
-      if (sortRef.current && !sortRef.current.contains(target)) setSortOpen(false);
-      if (categoryRef.current && !categoryRef.current.contains(target)) setCategoryOpen(false);
-    }
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
 
   return (
     <div className="flex justify-between">
       {/* Search Input */}
-      <div className="relative w-[320px]">
+      <div className="relative sm:max-w-[320px] w-full mb-50 lg:mb-0">
         <input
-          className="border border-beige-500 rounded-[8px] w-full px-250 py-150 text-preset-4"
+          className="border border-beige-500 rounded-[8px] w-full px-250 py-[11px] text-preset-4"
           placeholder="Search transaction"
+          defaultValue={searchParams.get('query') || ''}
+          onChange={e => {updateParam('query', e.target.value)}}
         />
         <Image
           src="/images/icon-search.svg"
           alt="Search"
-          width={16}
-          height={16}
+          width={14}
+          height={14}
           className="absolute right-250 top-1/2 transform -translate-y-1/2"
         />
       </div>
 
       {/* Sort and Category Buttons */}
-      <div className="flex gap-300">
-        {/* Sort Dropdown */}
-        <div className="flex items-center gap-100 relative" ref={sortRef}>
-          <label className="text-preset-4 text-grey-500">Sort by</label>
-          <div className="relative w-max">
-            <button
-              onClick={() => {
-                setSortOpen(prev => !prev);
-                setCategoryOpen(false);
-              }}
-              className="flex justify-between w-[120px] gap-200 px-250 py-150 border border-beige-500 rounded-[8px] text-preset-4 cursor-pointer hover:bg-grey-100 active:bg-grey-300 transition-bg duration-200"
-            >
-              {sortValue}
-              <Image
-                src="/images/icon-caret-down.svg"
-                alt="sort"
-                width={11}
-                height={6}
-                className={`transition-transform duration-200 group-hover:brightness-300 ${sortOpen ? 'rotate-180' : ''}`}
-              />
-            </button>
-            <div className={`absolute w-full top-full left-0 mt-100 bg-white rounded-[8px] shadow-[0px_4px_24px_rgba(0,0,0,0.25)] max-h-[300px] overflow-scroll transition-all duration-200 origin-top transform ${sortOpen ? 'opacity-100 scale-100 pointer-events-auto' : 'opacity-0 scale-95 pointer-events-none'}`}>
-              <ul className="text-preset-4">
-                {SORT_OPTIONS.map(option => (
-                  <li
-                    key={option}
-                    onClick={() => {
-                      setSortValue(option);
-                      updateParam('sort', option);
-                      setSortOpen(false);
-                    }}
-                    className={`px-250 py-150 cursor-pointer hover:bg-grey-100 ${sortValue === option ? 'font-bold text-grey-900' : ''}`}
-                  >
-                    {option}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        {/* Category Dropdown */}
-        <div className="flex items-center gap-100 relative" ref={categoryRef}>
-          <label className="text-preset-4 text-grey-500">Category</label>
-          <div className="relative w-max">
-            <button
-              onClick={() => {
-                setCategoryOpen(prev => !prev);
-                setSortOpen(false);
-              }}
-              className="flex w-[177px] gap-200 justify-between px-250 py-150 border border-beige-500 rounded-[8px] text-preset-4 cursor-pointer hover:bg-grey-100 active:bg-grey-300 transition-bg duration-200"
-            >
-              {categoryValue}
-              <Image
-                src="/images/icon-caret-down.svg"
-                alt="category"
-                width={11}
-                height={6}
-                className={`transition-transform duration-200 group-hover:brightness-300 ${categoryOpen ? 'rotate-180' : ''}`}
-              />
-            </button>
-            <div className={`absolute w-full top-full left-0 mt-100 bg-white rounded-[8px] shadow-[0px_4px_24px_rgba(0,0,0,0.25)] max-h-[300px] overflow-scroll transition-all duration-200 origin-top transform ${categoryOpen ? 'opacity-100 scale-100 pointer-events-auto' : 'opacity-0 scale-95 pointer-events-none'}`}>
-              <ul className="text-preset-4">
-                {CATEGORY_OPTIONS.map(option => (
-                  <li
-                    key={option}
-                    onClick={() => {
-                      setCategoryValue(option);
-                      updateParam('category', option);
-                      setCategoryOpen(false);
-                    }}
-                    className={`px-250 py-150 cursor-pointer hover:bg-grey-100 ${categoryValue === option ? 'font-bold text-grey-900' : ''}`}
-                  >
-                    {option}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
+      <div className="flex md:gap-300">
+        <DropdownButton
+          label="Sort by"
+          options={SORT_OPTIONS}
+          value={sortValue}
+          iconSrc='/images/icon-sort-mobile.svg'
+          buttonWidth='w-[122px]'
+          wrapperClassName='ml-150 md:ml-300'
+          onChange={(val) => {
+            setSortValue(val);
+            updateParam('sort', val);
+          }}
+        />
+        <DropdownButton
+          label="Category"
+          options={CATEGORY_OPTIONS}
+          value={categoryValue}
+          iconSrc='/images/icon-filter-mobile.svg'
+          buttonWidth={'w-[177px]'}
+          onChange={(val) => {
+            setCategoryValue(val);
+            updateParam('category', val);
+          }}
+        />
       </div>
     </div>
   );

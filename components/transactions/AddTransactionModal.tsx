@@ -19,7 +19,7 @@ export default function AddTransactionModal() {
   const handleSubmit = async () => {
     if (!sender || !amount || !date || !category || !type) return;
 
-    const x = await fetch('/api/transactions', {
+    await fetch('/api/transactions', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -31,9 +31,6 @@ export default function AddTransactionModal() {
         type
       }),
     });
-
-    const data = await x.json();
-    console.log("x", data)
 
     setIsOpen(false);
     setSender('');
@@ -48,10 +45,13 @@ export default function AddTransactionModal() {
     <>
       <button
         onClick={() => setIsOpen(true)}
-        className="bg-grey-900 text-white px-300 py-2 rounded-[8px] hover:bg-grey-700 h-full text-preset-3 hover:bg-grey-500 cursor-pointer"
+        className="bg-grey-900 text-white px-200 h-full sm:px-300 rounded-[8px] hover:bg-grey-700 sm:h-full text-preset-4-bold hover:bg-grey-500 cursor-pointer"
       >
-        + Add Transaction
+        <span className="sm:hidden">+ &nbsp;Add</span>
+        <span className="hidden sm:inline">+ &nbsp;Add Transaction</span>
       </button>
+
+
 
       {isOpen && (
         <div

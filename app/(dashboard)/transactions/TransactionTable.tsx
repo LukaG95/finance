@@ -1,7 +1,6 @@
 import TransactionRow from '@/components/transactions/TransactionRow';
 import Pagination from './Pagination';
 import Card from '@/components/ui/Card';
-import Image from 'next/image';
 import FilterBar from '@/components/transactions/FilterBar';
 
 type Transaction = {
@@ -22,11 +21,11 @@ interface Props {
 export default function TransactionTable({ transactions, total, currentPage, perPage = 10 }: Props) {
   const totalPages = Math.ceil(total / perPage);
   return (
-    <Card className='flex flex-col p-400 gap-300'>
+    <Card className='flex flex-col px-250 py-300 md:p-400 gap-300'>
       <FilterBar />
 
       {/* Headers */}
-      <div className="grid grid-cols-[4fr_170px_120px_200px] text-grey-500 text-preset-5 border-b border-grey-100 py-150 px-200">
+      <div className="grid-cols-[3fr_1fr_1fr_80px] text-grey-500 text-preset-5 border-b border-grey-100 py-150 lg:px-200 whitespace-nowrap hidden lg:grid">
         <span>Recipient / Sender</span>
         <span>Category</span>
         <span>Transaction Date</span>

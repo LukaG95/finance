@@ -2,9 +2,26 @@ import { auth } from '@/lib/auth';
 import client from '@/lib/mongodb';
 import { redirect } from 'next/navigation';
 import TransactionTable from './TransactionTable';
+import type { SortDirection } from 'mongodb';
 
-// TransactionTableWrapper.tsx
-export default async function TransactionTableWrapper({ searchParams }: { searchParams: { page?: string } }) {
+const getSortOption = (sort: string | undefined): Record<string, SortDirection> => {
+  switch (sort) {
+    case 'Oldest':
+      return { date: 1 };
+    case 'A to Z':
+      return { sender: 1 };
+    case 'Z to A':
+      return { sender: -1 };
+    case 'Highest':
+      return { amount: -1 };
+    case 'Lowest':
+      return { amount: 1 };
+    default:
+      return { date: -1 };
+  }
+};
+
+export default async function TransactionTableWrapper({ searchParams }) {
   const session = await auth();
   if (!session?.user?.email) redirect('/login');
 
@@ -12,16 +29,27 @@ export default async function TransactionTableWrapper({ searchParams }: { search
   const user = await db.collection('users').findOne({ email: session.user.email });
   if (!user?._id) redirect('/login');
 
-  const page = parseInt(searchParams.page || '1') || 1;
+  const resolvedParams = await searchParams;
+
+  const selectedCategory = resolvedParams.category || 'All Transactions';
+  const page = parseInt(resolvedParams.page || '1') || 1;
+  const sort = resolvedParams.sort;
   const perPage = 10;
   const skip = (page - 1) * perPage;
+  const sortQuery = getSortOption(sort);
 
+  const filter: any = {
+    $or: [{ sender_id: user._id }, { receiver_id: user._id }],
+  };
+  const query = resolvedParams.query?.toLowerCase();
+
+  if (selectedCategory !== 'All Transactions') filter.category = selectedCategory;
+  if (query) filter.sender = { $regex: query, $options: 'i' }; // case-insensitive
+  
   const rawTransactions = await db
     .collection('transactions')
-    .find({
-      $or: [{ sender_id: user._id }, { receiver_id: user._id }],
-    })
-    .sort({ date: -1 })
+    .find(filter)
+    .sort(sortQuery)
     .skip(skip)
     .limit(perPage)
     .toArray();
@@ -34,9 +62,7 @@ export default async function TransactionTableWrapper({ searchParams }: { search
     amount: tx.amount ?? 0,
   }));
 
-  const total = await db.collection('transactions').countDocuments({
-    $or: [{ sender_id: user._id }, { receiver_id: user._id }],
-  });
+  const total = await db.collection('transactions').countDocuments(filter);
 
   return (
     <TransactionTable
