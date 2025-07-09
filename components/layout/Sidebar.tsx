@@ -7,13 +7,11 @@ import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 import { sidebarLinks, minimizeMenuLink } from '@/lib/constants';
 import Link from 'next/link';
-import useWindowDimensions from 'hooks/useWindowDimentions';
 
 export default function Sidebar() {
   const [collapsed, setCollapsed] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
-  const { s_width } = useWindowDimensions();
 
   return (
     <aside
@@ -80,7 +78,7 @@ export default function Sidebar() {
           extraMargin={'mb-300'}
         />
       </div>
-      
+
     </aside>
   );
 }

@@ -29,7 +29,7 @@ export default async function TransactionTableWrapper({ searchParams }) {
   const user = await db.collection('users').findOne({ email: session.user.email });
   if (!user?._id) redirect('/login');
 
-  const resolvedParams = await searchParams;
+  const resolvedParams = searchParams;
 
   const selectedCategory = resolvedParams.category || 'All Transactions';
   const page = parseInt(resolvedParams.page || '1') || 1;
