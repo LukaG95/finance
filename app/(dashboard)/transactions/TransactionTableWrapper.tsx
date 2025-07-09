@@ -44,7 +44,10 @@ export default async function TransactionTableWrapper({ searchParams }) {
   const query = resolvedParams.query?.toLowerCase();
 
   if (selectedCategory !== 'All Transactions') filter.category = selectedCategory;
-  if (query) filter.sender = { $regex: query, $options: 'i' }; // case-insensitive
+  if (query) {
+  const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // escape regex special chars
+  filter.sender = { $regex: escapedQuery, $options: 'i' }; // case insensitive
+}
   
   const rawTransactions = await db
     .collection('transactions')

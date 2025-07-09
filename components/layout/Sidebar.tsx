@@ -18,7 +18,7 @@ export default function Sidebar() {
   return (
     <aside
       className={`
-        text-preset-3 flex flex-col justify-between gap-300 pt-100 lg:pb-300 lg:pt-0 px-500 lg:px-0
+        text-preset-3 flex flex-col justify-between gap-300 pt-100 lg:pb-300 lg:pt-0 px-200 md:px-500 lg:!px-0
         bg-grey-900 rounded-t-[8px] lg:rounded-t-none lg:rounded-r-[16px] transition-all duration-300 shrink-0
         ${collapsed ? 'lg:w-[88px]' : 'lg:w-[300px]'} w-full
       `}
@@ -48,33 +48,39 @@ export default function Sidebar() {
       </div>
 
 
-      <div className={`rounded-r-[12px] h-full flex flex-row justify-between lg:justify-normal gap-[4px] transition-padding duration-300 ${collapsed && s_width >= 1060 ? 'pr-100' : s_width >=1060 && 'pr-300'} lg:flex-col`}> 
+      <div 
+        className={`
+          flex flex-row lg:flex-col justify-between lg:justify-normal gap-[4px] 
+          h-full rounded-r-[12px]
+          transition-padding duration-300 ${collapsed ? 'lg:pr-100' : 'lg:pr-300'}
+        `}> 
         {sidebarLinks.map((link) => (
-          <Link href={link.href} key={link.href}>
+          <Link href={link.href} key={link.href} className='w-full md:w-fit lg:!w-full'>
             <SidebarButton
               width={link.width}
               height={link.height}
               iconPath={link.iconPath}
               text={link.text}
-              showText={!collapsed || s_width < 1060}
+              showText={!collapsed}
               active={pathname === link.href}
             />
           </Link>
         ))}
       </div>
 
-      {s_width > 1060 && (
+      <div className="hidden lg:block">
         <SidebarButton
           width={minimizeMenuLink.width}
           height={minimizeMenuLink.height}
           iconPath={minimizeMenuLink.iconPath}
           text="Minimize Menu"
-          showText={!collapsed || s_width < 1060}
+          showText={!collapsed}
           onClick={() => setCollapsed(!collapsed)}
           imageClassName={collapsed ? 'rotate-180' : 'rotate-0'}
           extraMargin={'mb-300'}
         />
-      )}
+      </div>
+      
     </aside>
   );
 }

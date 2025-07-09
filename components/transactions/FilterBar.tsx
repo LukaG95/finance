@@ -32,7 +32,11 @@ export default function FilterBar() {
       params.set('page', '1');
     }
 
-    router.replace(`?${params.toString()}`);
+    router.replace(`?${params.toString()}`, {scroll: false});
+
+    // Disable automatic scroll and scroll manually, because of DashboardLayout padding issue
+    const container = document.getElementById('dashboard-scroll-container');
+    container?.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -40,7 +44,7 @@ export default function FilterBar() {
       {/* Search Input */}
       <div className="relative sm:max-w-[320px] w-full mb-50 lg:mb-0">
         <input
-          className="border border-beige-500 rounded-[8px] w-full px-250 py-[11px] text-preset-4"
+          className="border border-beige-500 rounded-[8px] w-full pl-250 pr-500 py-[11px] text-preset-4 truncate overflow-hidden whitespace-nowrap"
           placeholder="Search transaction"
           defaultValue={searchParams.get('query') || ''}
           onChange={e => {updateParam('query', e.target.value)}}
@@ -61,7 +65,7 @@ export default function FilterBar() {
           options={SORT_OPTIONS}
           value={sortValue}
           iconSrc='/images/icon-sort-mobile.svg'
-          buttonWidth='w-[122px]'
+          buttonWidth="w-full md:w-[122px]"
           wrapperClassName='ml-150 md:ml-300'
           onChange={(val) => {
             setSortValue(val);
@@ -73,7 +77,7 @@ export default function FilterBar() {
           options={CATEGORY_OPTIONS}
           value={categoryValue}
           iconSrc='/images/icon-filter-mobile.svg'
-          buttonWidth={'w-[177px]'}
+          buttonWidth="w-full md:w-[177px]"
           onChange={(val) => {
             setCategoryValue(val);
             updateParam('category', val);

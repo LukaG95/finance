@@ -1,0 +1,55 @@
+'use client';
+
+import { useEffect, useState } from 'react';
+import Image from 'next/image';
+
+interface ModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  children: React.ReactNode;
+  className?: string;
+}
+
+export default function Modal({ isOpen, onClose, children, className = '' }: ModalProps) {
+  const [shouldRender, setShouldRender] = useState(false);
+
+  useEffect(() => {
+    if (isOpen) {
+      setShouldRender(true);
+    } else {
+      const timeout = setTimeout(() => setShouldRender(false), 150);
+      return () => clearTimeout(timeout);
+    }
+  }, [isOpen]);
+
+  if (!shouldRender) return null;
+
+  return (
+    <div
+      className={`fixed inset-0 z-2 bg-black/40 flex items-center justify-center transition-opacity ${
+        isOpen ? 'animate-fadeIn' : 'animate-fadeOut'
+      }`}
+      onClick={onClose}
+    >
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className={`flex flex-col gap-250 relative bg-white rounded-xl px-250 py-300 md:p-400 h-full sm:h-fit w-full sm:w-[560px] transition-transform ${
+          isOpen ? 'animate-scaleIn' : 'animate-scaleOut'
+        } ${className}`}
+      >
+        {children}
+         <button
+            onClick={onClose}
+            className="absolute top-300 right-250 sm:right-400 sm:top-500 hover:opacity-80 transition-opacity cursor-pointer"
+          >
+            <Image
+              src="/images/icon-close-modal.svg"
+              alt="Close"
+              width={20}
+              height={20}
+            />
+          </button>
+      </div>
+    </div>
+  );
+}

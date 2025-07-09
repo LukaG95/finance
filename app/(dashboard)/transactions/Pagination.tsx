@@ -20,7 +20,10 @@ export default function Pagination({
   const goToPage = (page: number) => {
     const params = new URLSearchParams(window.location.search);
     params.set('page', page.toString());
-    router.push(`?${params.toString()}`);
+    router.push(`?${params.toString()}`, {scroll: false});
+    // Disable automatic scroll and scroll manually, because of DashboardLayout padding issue
+    const container = document.getElementById('dashboard-scroll-container');
+    container?.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const getPageItems = (): (number | string)[] => {

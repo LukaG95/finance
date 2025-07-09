@@ -1,5 +1,3 @@
-import useWindowDimensions from 'hooks/useWindowDimentions';
-
 type SidebarButtonProps = {
   height: string;
   width: string;
@@ -24,13 +22,12 @@ export default function SidebarButton({
   extraMargin = '',
   active = false
 }: SidebarButtonProps) {
-   const { s_width } = useWindowDimensions();
 
   return (
     <button
       onClick={onClick}
       className={`
-        relative group pb-150 pt-100 lg:py-200 transition-colors duration-300 cursor-pointer lg:w-full w-[104px] lg:px-400 lg:rounded-r-[12px] rounded-t-[8px] overflow-hidden
+        relative group pb-150 pt-100 lg:py-200 transition-colors duration-300 cursor-pointer w-full md:w-[104px] lg:!w-full lg:px-400 lg:rounded-r-[12px] lg:rounded-t-[0px] rounded-t-[8px] overflow-hidden
         ${active ? 'bg-beige-100' : ''}
         ${extraMargin}
      
@@ -61,7 +58,8 @@ export default function SidebarButton({
             className={`
               transition-opacity duration-300 mt-[4px] lg:mt-0 lg:ml-200 whitespace-nowrap hidden md:block
               text-preset-5-bold lg:!text-[16px]
-              ${showText ? 'opacity-100' : 'opacity-0'}
+              ${!showText && 'lg:!opacity-0'}
+              opacity-0 md:opacity-100 
               text-grey-300 ${active ? 'text-grey-900' : 'group-hover:text-grey-100'}
             `}
           >

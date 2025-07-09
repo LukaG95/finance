@@ -23,6 +23,8 @@ export default function TransactionRow({ tx, isFirst, isLast }: Props) {
   const { s_width } = useWindowDimensions();
   const isMobile = s_width < 640;
 
+  console.log(isMobile)
+
   return (
     <div
       className={`grid sm:grid-cols-[3fr_1fr_1fr_80px] grid-cols-2 gap-y-2 items-center border-b border-grey-100 py-300 lg:px-200 ${
@@ -34,9 +36,9 @@ export default function TransactionRow({ tx, isFirst, isLast }: Props) {
         <Image
           src={imgSrc}
           alt={tx.sender}
-          width={isMobile ? 32 : 40}
-          height={isMobile ? 32 : 40}
-          className="rounded-full object-cover"
+          width={40}
+          height={40}
+          className="rounded-full object-cover w-[32px] h-[32px] sm:w-[40px] sm:h-[40px]"
           onError={() => setImgSrc(fallbackImage)}
         />
         <div className="flex flex-col gap-50">
