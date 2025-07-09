@@ -4,7 +4,7 @@ import TransactionTableWrapper from './TransactionTableWrapper';
 import Loading from './loading';
 import AddTransactionModal from '@/components/transactions/AddTransactionModal';
 
-export default async function TransactionsPage({ searchParams }: { searchParams: { page?: string } }) {
+export default async function TransactionsPage({ searchParams }: any ) {
   return (
     <div className='flex flex-col gap-400 pb-400'>
       <Header>

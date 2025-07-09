@@ -23,8 +23,6 @@ export default function TransactionRow({ tx, isFirst, isLast }: Props) {
   const { s_width } = useWindowDimensions();
   const isMobile = s_width < 640;
 
-  console.log(isMobile)
-
   return (
     <div
       className={`grid sm:grid-cols-[3fr_1fr_1fr_80px] grid-cols-2 gap-y-2 items-center border-b border-grey-100 py-300 lg:px-200 ${
