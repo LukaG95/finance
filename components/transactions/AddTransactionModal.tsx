@@ -66,7 +66,7 @@ export default function AddTransactionModal() {
             type="text"
             value={sender}
             onChange={(e) => setSender(e.target.value)}
-            className="w-full border rounded-[8px] px-3 py-2 text-sm focus:outline-none border-beige-500 focus:border-black"
+            className="w-full border rounded-[8px] px-250 py-[11px] text-sm focus:outline-none border-beige-500 focus:border-black"
           />
         </div>
 
@@ -89,13 +89,13 @@ export default function AddTransactionModal() {
             type="date"
             value={date}
             onChange={(e) => setDate(e.target.value)}
-            className="w-full border rounded-[8px] px-3 py-2 text-sm focus:outline-none border-beige-500 focus:border-black"
+            className="w-full border rounded-[8px] px-200 py-[11px] text-sm focus:outline-none border-beige-500 focus:border-black"
           />
         </div>
 
         <div>
           <label className="text-preset-5-bold text-grey-500 block mb-50">Amount (USD)</label>
-          <div className="flex items-center border rounded-[8px] px-3 py-2 border-beige-500 focus-within:border-black">
+          <div className="flex items-center border rounded-[8px] px-250 py-[11px] border-beige-500 focus-within:border-black">
             <span className="text-sm text-grey-500 mr-2">$</span>
             <input
               type="number"

@@ -33,20 +33,20 @@ export default function Modal({ isOpen, onClose, children, className = '' }: Mod
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className={`flex flex-col gap-250 relative bg-white rounded-xl px-250 py-300 md:p-400 h-full sm:h-fit w-full sm:w-[560px] transition-transform ${
+        className={`flex flex-col gap-250 relative bg-white sm:rounded-xl px-250 py-300 md:p-400 h-full sm:h-fit w-full sm:w-[560px] transition-transform ${
           isOpen ? 'animate-scaleIn' : 'animate-scaleOut'
         } ${className}`}
       >
         {children}
          <button
             onClick={onClose}
-            className="absolute top-300 right-250 sm:right-400 sm:top-500 hover:opacity-80 transition-opacity cursor-pointer"
+            className="absolute top-250 right-250 sm:right-400 sm:top-500 hover:opacity-80 transition-opacity cursor-pointer"
           >
             <Image
               src="/images/icon-close-modal.svg"
               alt="Close"
-              width={20}
-              height={20}
+              width={25.5}
+              height={25.5}
             />
           </button>
       </div>

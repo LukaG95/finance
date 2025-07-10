@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 import Header from '@/components/layout/Header';
 import TransactionTableWrapper from './TransactionTableWrapper';
-import Loading from './loading';
+import Loading from '@/components/ui/Loading';
 import AddTransactionModal from '@/components/transactions/AddTransactionModal';
 
 export default async function TransactionsPage({ searchParams }: any ) {
