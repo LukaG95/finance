@@ -24,7 +24,7 @@ export default async function BudgetCard({
   const themeColorClass = THEME_CLASSES[theme] || 'bg-grey-300';
 
   return (
-    <Card className='relative flex flex-col justify-between gap-250'>
+    <Card className='relative flex flex-col justify-between gap-250 !p-250 sm:!p-400'>
       {/* Header */}
       <div className="flex items-center gap-200">
         <span className={`h-[16px] w-[16px] rounded-full ${themeColorClass}`} />
@@ -33,7 +33,7 @@ export default async function BudgetCard({
           options={['Edit Budget', 'Delete Budget']}
           iconSrc='/images/icon-ellipsis.svg'
           buttonWidth="w-full"
-          wrapperClassName='!absolute right-250'
+          wrapperClassName='!absolute right-150 sm:right-250'
           variant='ellipsis'
           budget={{ budgetId: _id, category, theme, amount }}
         />
