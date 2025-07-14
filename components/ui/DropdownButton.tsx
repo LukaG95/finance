@@ -200,23 +200,25 @@ export default function DropdownButton({
       </div>
 
       <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
-        <div className="flex flex-col gap-250">
+        <div className="flex flex-col gap-250 h-full">
           <h2 className="text-preset-2 sm:!text-[32px] text-grey-900">{`Delete '${category}'`}</h2>
           <p className="text-preset-4 text-grey-500">
             Are you sure you want to delete this budget? This action cannot be reversed, and all the data inside it will be removed forever.
           </p>
-          <button
-            onClick={handleDelete}
-            className="text-preset-4-bold text-red-600 w-full p-200 bg-red text-white rounded-xl hover:brightness-115 transition duration-250 cursor-pointer"
-          >
-            Yes, delete
-          </button>
-          <button
-            onClick={() => setModalOpen(false)}
-            className="text-preset-4 text-grey-500 hover:text-grey-900 transition duration-200 cursor-pointer"
-          >
-            No, Go Back
-          </button>
+          <div className="flex flex-col gap-250 !mt-auto sm:mt-0">
+            <button
+              onClick={handleDelete}
+              className="text-preset-4-bold text-red-600 w-full p-200 bg-red text-white rounded-xl hover:brightness-115 transition duration-250 cursor-pointer"
+            >
+              Yes, delete
+            </button>
+            <button
+              onClick={() => setModalOpen(false)}
+              className="text-preset-4 text-grey-500 hover:text-grey-900 transition duration-200 cursor-pointer"
+            >
+              No, Go Back
+            </button>
+          </div>
         </div>
       </Modal>
 
