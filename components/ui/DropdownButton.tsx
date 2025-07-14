@@ -130,7 +130,7 @@ export default function DropdownButton({
 
         <div
           className={classNames(
-            'absolute top-full right-0 mt-100 bg-white rounded-[8px] shadow-[0px_4px_24px_rgba(0,0,0,0.25)] max-h-[300px] overflow-scroll transition-all duration-200 origin-top transform',
+            'absolute top-full right-0 mt-100 bg-white rounded-[8px] shadow-[0px_4px_24px_rgba(0,0,0,0.25)] max-h-[250px] sm:max-h-[300px] overflow-scroll transition-all duration-200 origin-top transform',
             open ? 'opacity-100 scale-100 pointer-events-auto' : 'opacity-0 scale-95 pointer-events-none',
             buttonWidth,
             'min-w-max'
