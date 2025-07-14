@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import useWindowDimensions from '../../../hooks/useWindowDimentions';
+import useWindowDimensions from '../../hooks/useWindowDimentions';
 
 export default function Pagination({
   totalPages,

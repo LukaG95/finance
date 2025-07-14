@@ -64,5 +64,59 @@ export const SORT_OPTIONS = [
   'Lowest',
 ] as const;
 
+export const THEMES = [
+  'Green',
+  'Yellow',
+  'Cyan',
+  'Navy',
+  'Red',
+  'Purple',
+  'Turquoise',
+  'Brown',
+  'Magenta',
+  'Blue',
+  'Navy-Grey',
+  'Army-Green',
+  'Pink',
+  'Gold',
+  'Orange'
+] as const;
+
+export const THEME_CLASSES: Record<string, string> = {
+  Green: 'bg-green',
+  Yellow: 'bg-yellow',
+  Cyan: 'bg-cyan',
+  Navy: 'bg-navy',
+  Red: 'bg-red',
+  Purple: 'bg-purple',
+  Turquoise: 'bg-turquoise',
+  Brown: 'bg-brown',
+  Magenta: 'bg-magenta',
+  Blue: 'bg-blue',
+  'Navy-Grey': 'bg-navy-grey',
+  'Army-Green': 'bg-army-green',
+  Pink: 'bg-pink',
+  Gold: 'bg-gold',
+  Orange: 'bg-orange'
+};
+
+export const THEME_HEX: Record<string, string> = {
+  Green: '#277C78',
+  Yellow: '#F2CDAC',
+  Cyan: '#82C9D7',
+  Navy: '#626070',
+  Red: '#C94736',
+  Purple: '#826CB0',
+  Turquoise: '#597C7C',
+  Brown: '#93674F',
+  Magenta: '#934F6F',
+  Blue: '#3F82B2',
+  'Navy-Grey': '#97A0AC',
+  'Army-Green': '#7F9161',
+  Pink: '#AF81BA', // same as purple-other
+  Gold: '#CAB361',
+  Orange: '#BE6C49'
+};
+
 export type Category = typeof CATEGORIES[number];
 export type SortOption = typeof SORT_OPTIONS[number];

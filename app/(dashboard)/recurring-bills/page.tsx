@@ -1,13 +1,7 @@
-import { auth } from '@/lib/auth';
-import { redirect } from 'next/navigation';
+import { getCurrentUser } from '@/lib/data/getCurrentUser';
 
 export default async function RecurringBills() {
-  const session = await auth();
-
-  console.log("session", session)
-   if (!session?.user) {
-    redirect('/login');
-  }
+  const user = await getCurrentUser();
 
   return (
     <div>

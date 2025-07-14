@@ -1,5 +1,3 @@
-'use client';
-
 import React from 'react';
 import clsx from 'clsx';
 
@@ -15,7 +13,7 @@ export default function Card({ children, className = '', variant = 'light' }: Ca
       className={clsx(
         'w-full',
         'text-grey-900',
-        'p-300',
+        'p-400',
         'rounded-xl',
         variant === 'light' ? 'bg-white' : 'bg-grey-900 text-white',
         className

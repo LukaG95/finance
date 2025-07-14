@@ -1,8 +1,4 @@
-'use client';
-
-import Image from 'next/image';
-import { useState } from 'react';
-import useWindowDimensions from '../../hooks/useWindowDimentions';
+import ImageFallback from '../../../components/ui/ImageFallback';
 
 type Props = {
   tx: {
@@ -18,10 +14,6 @@ type Props = {
 
 export default function TransactionRow({ tx, isFirst, isLast }: Props) {
   const imageName = tx.sender.toLowerCase().replace(/\s+/g, '-');
-  const fallbackImage = '/images/avatars/default.png';
-  const [imgSrc, setImgSrc] = useState(`/images/avatars/${imageName}.jpg`);
-  const { s_width } = useWindowDimensions();
-  const isMobile = s_width < 640;
 
   return (
     <div
@@ -31,14 +23,15 @@ export default function TransactionRow({ tx, isFirst, isLast }: Props) {
     >
       {/* Sender + Category */}
       <div className="flex items-center gap-2 col-span-1">
-        <Image
-          src={imgSrc}
+        <ImageFallback 
+          src={`/images/avatars/${imageName}.jpg`} 
+          fallbackSrc={'/images/avatars/default.png'}
           alt={tx.sender}
           width={40}
           height={40}
           className="rounded-full object-cover w-[32px] h-[32px] sm:w-[40px] sm:h-[40px]"
-          onError={() => setImgSrc(fallbackImage)}
         />
+
         <div className="flex flex-col gap-50">
           <span className="text-preset-4-bold text-grey-900 whitespace-nowrap">{tx.sender}</span>
           <span className="text-grey-500 text-preset-5 sm:hidden">{tx.category}</span>

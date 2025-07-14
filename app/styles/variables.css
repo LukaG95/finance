@@ -38,6 +38,7 @@
   --color-gold: #CAB361;
   --color-orange: #BE6C49;
   --color-white: #FFFFFF;
+  --color-pink: #AF81BA;
 
   --spacing-500: 40px;
   --spacing-400: 32px;
@@ -49,6 +50,7 @@
   --spacing-50: 4px;
 
   --breakpoint-lg: 1060px;
+  --breakpoint-1350: 1350px;
 }
 
 @layer utilities {

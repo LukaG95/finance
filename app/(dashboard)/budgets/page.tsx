@@ -1,17 +1,42 @@
-import { Suspense } from 'react';
 import Header from '@/components/layout/Header';
-import Loading from '@/components/ui/Loading';
-import AddBudgetModal from '@/components/budgets/AddBudgetModal';
+import SpendingSummaryList from './SpendingSummaryList';
+import Card from '@/components/ui/Card';
+import DonutChart from '@/components/budgets/DonutChart';
+import BudgetCard from './BudgetCard';
+import { getCurrentUser } from '@/lib/data/getCurrentUser';
+import { getTransactions } from '@/lib/data/getTransactions';
+import { getBudgets } from '@/lib/data/getBudgets';
+import { getBudgetSummaries, getTotalSpentAndLimit } from '@/lib/data/getBudgetStats';
+import AddBudgetButton from '@/components/budgets/AddBudgetButton';
 
-export default async function BudgetsPage({ searchParams }: any ) {
+export default async function BudgetsPage() {
+  const user = await getCurrentUser();
+  const budgets = await getBudgets(user._id);
+  const transactions = await getTransactions(user._id);
+
+  const budgetSummaries = getBudgetSummaries(budgets, transactions);
+  const { totalSpent, totalLimit } = getTotalSpentAndLimit(budgetSummaries);
+
   return (
-    <div className='flex flex-col gap-400 pb-400'>
+    <div className="flex flex-col gap-400 pb-400">
       <Header>
-        <h1 className='text-preset-1 text-grey-900'>Budgets</h1>
+        <h1 className="text-preset-1 text-grey-900">Budgets</h1>
         <div className="absolute right-0 bottom-0 flex gap-200 items-center h-full">
-          <AddBudgetModal />
+          <AddBudgetButton />
         </div>
       </Header>
+
+      <div className="grid grid-cols-1 1350:grid-cols-[428px_1fr] gap-300">
+        <Card className="p-400 pb-300 h-fit">
+          <DonutChart budgets={budgetSummaries} totalLimit={totalLimit} totalSpent={totalSpent}/>
+          <SpendingSummaryList budgets={budgetSummaries} />
+        </Card>
+        <div className="flex flex-col gap-300">
+          {budgetSummaries.map(budget => (
+            <BudgetCard key={budget._id} budget={budget} userId={user._id}/>
+          ))}
+        </div>
+      </div>
     </div>
   );
 }

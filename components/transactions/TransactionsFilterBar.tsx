@@ -11,7 +11,7 @@ const CATEGORY_OPTIONS = [
   'Lifestyle', 'Personal Care', 'Education', 'Bills', 'Shopping'
 ];
 
-export default function FilterBar() {
+export default function TransactionsFilterBar() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -67,6 +67,7 @@ export default function FilterBar() {
           iconSrc='/images/icon-sort-mobile.svg'
           buttonWidth="w-full md:w-[122px]"
           wrapperClassName='ml-150 md:ml-300'
+          variant='default'
           onChange={(val) => {
             setSortValue(val);
             updateParam('sort', val);
@@ -78,6 +79,7 @@ export default function FilterBar() {
           value={categoryValue}
           iconSrc='/images/icon-filter-mobile.svg'
           buttonWidth="w-full md:w-[177px]"
+          variant='default'
           onChange={(val) => {
             setCategoryValue(val);
             updateParam('category', val);
