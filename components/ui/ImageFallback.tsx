@@ -15,11 +15,6 @@ export default function ImageFallback({ src, fallbackSrc, alt, ...rest }) {
       {...rest}
       src={imgSrc}
       alt={alt}
-      onLoad={(result) => {
-        if (result.naturalWidth === 0) {
-          set_imgSrc(fallbackSrc);
-        }
-      }}
       onError={() => {
         set_imgSrc(fallbackSrc);
       }}
