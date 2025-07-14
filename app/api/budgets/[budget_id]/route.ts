@@ -2,16 +2,16 @@ import { NextResponse } from 'next/server';
 import client from '@/lib/mongodb';
 import { ObjectId } from 'mongodb';
 
-export async function DELETE(request: Request, { params }: { params: { id: string } }) {
+export async function DELETE(request: Request, { params }: { params: Promise<{ budget_id: string }> }) {
   try {
     const db = client.db();
-    const budgetId = params.id;
+    const {budget_id} = await params;
 
-    if (!ObjectId.isValid(budgetId)) {
+    if (!ObjectId.isValid(budget_id)) {
       return NextResponse.json({ error: 'Invalid ID' }, { status: 400 });
     }
 
-    const result = await db.collection('budgets').deleteOne({ _id: new ObjectId(budgetId) });
+    const result = await db.collection('budgets').deleteOne({ _id: new ObjectId(budget_id) });
 
     if (result.deletedCount === 0) {
       return NextResponse.json({ error: 'Budget not found' }, { status: 404 });
@@ -24,12 +24,12 @@ export async function DELETE(request: Request, { params }: { params: { id: strin
   }
 }
 
-export async function PUT(request: Request, context: { params: { id: string } }) {
+export async function PUT(request: Request, { params }: { params: Promise<{ budget_id: string }> }) {
   try {
     const db = client.db();
-    const budgetId = context.params.id;
+    const {budget_id} = await params;
 
-    if (!ObjectId.isValid(budgetId)) {
+    if (!ObjectId.isValid(budget_id)) {
       return NextResponse.json({ error: 'Invalid ID' }, { status: 400 });
     }
 
@@ -41,7 +41,7 @@ export async function PUT(request: Request, context: { params: { id: string } })
     }
 
     const result = await db.collection('budgets').updateOne(
-      { _id: new ObjectId(budgetId) },
+      { _id: new ObjectId(budget_id) },
       { $set: { category, theme, amount } }
     );
 
