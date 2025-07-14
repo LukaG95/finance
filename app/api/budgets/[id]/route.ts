@@ -24,10 +24,10 @@ export async function DELETE(request: Request, { params }: { params: { id: strin
   }
 }
 
-export async function PUT(request: Request, { params }: { params: { id: string } }) {
+export async function PUT(request: Request, context: { params: { id: string } }) {
   try {
     const db = client.db();
-    const budgetId = params.id;
+    const budgetId = context.params.id;
 
     if (!ObjectId.isValid(budgetId)) {
       return NextResponse.json({ error: 'Invalid ID' }, { status: 400 });

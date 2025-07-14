@@ -55,6 +55,7 @@ export default function DropdownButton({
   }, []);
 
   if (budget) var { budgetId, category } = budget;
+
   const isDefault = variant === 'default';
   const isModal = variant === 'modal';
   const isEllipsis = variant === 'ellipsis';
