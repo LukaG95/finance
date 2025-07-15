@@ -23,7 +23,7 @@ export default function Modal({ isOpen, onClose, children, className = '' }: Mod
   }, [isOpen]);
 
   if (!shouldRender) return null;
-
+  
   return (
     <div
       className={`fixed inset-0 z-2 bg-black/40 flex items-center justify-center transition-opacity ${

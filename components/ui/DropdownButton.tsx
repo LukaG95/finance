@@ -6,8 +6,9 @@ import classNames from 'classnames';
 import clsx from 'clsx';
 import { THEME_CLASSES } from '@/lib/constants';
 import { useRouter } from 'next/navigation';
-import Modal from '@/components/ui/Modal';
+import PotModal from '../pots/PotModal';
 import BudgetModal from '@/components/budgets/BudgetModal';
+import DeleteConfirmationModal from './DeleteConfirmationModal';
 
 type Props = {
   label?: string;
@@ -23,6 +24,7 @@ type Props = {
   isBudgetTheme?: boolean;
   existingValues?: string[];
   budget?: any;
+  pot?: any;
 };
 
 export default function DropdownButton({
@@ -37,10 +39,14 @@ export default function DropdownButton({
   isBudgetTheme,
   existingValues,
   budget,
+  pot,
 }: Props) {
   const [open, setOpen] = useState(false);
-  const [modalOpen, setModalOpen] = useState(false);
-  const [showEditModal, setShowEditModal] = useState(false);
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [showEditBudgetModal, setShowEditBudgetModal] = useState(false);
+  const [showEditPotModal, setShowEditPotModal] = useState(false);
+  const [deleteType, setDeleteType] = useState<'budget' | 'pot' | null>(null);
+
   const dropdownRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
@@ -54,7 +60,10 @@ export default function DropdownButton({
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  if (budget) var { budgetId, category } = budget;
+  const budgetId = budget?.budgetId;
+  const category = budget?.category;
+  const potId = pot?.potId;
+  const potName = pot?.name;
 
   const isDefault = variant === 'default';
   const isModal = variant === 'modal';
@@ -62,12 +71,13 @@ export default function DropdownButton({
   const themeColorClass = THEME_CLASSES[value];
 
   const handleDelete = async () => {
-    if (!budgetId) return;
-    await fetch(`/api/budgets/${budgetId}`, {
-      method: 'DELETE'
-    });
+    if (deleteType === 'budget' && budgetId) {
+      await fetch(`/api/budgets/${budgetId}`, { method: 'DELETE' });
+    } else if (deleteType === 'pot' && potId) {
+      await fetch(`/api/pots/${potId}`, { method: 'DELETE' });
+    }
     router.refresh();
-    setModalOpen(false);
+    setDeleteModalOpen(false);
   };
 
   return (
@@ -143,6 +153,8 @@ export default function DropdownButton({
               const isActive = value === option;
               const isBudgetEditButton = option === 'Edit Budget';
               const isBudgetDeleteButton = option === 'Delete Budget';
+              const isPotEditButton = option === 'Edit Pot';
+              const isPotDeleteButton = option === 'Delete Pot';
 
               return (
                 <li
@@ -150,12 +162,24 @@ export default function DropdownButton({
                   onClick={() => {
                     if (isBudgetDeleteButton && budgetId) {
                       setOpen(false);
-                      setModalOpen(true);
+                      setDeleteType('budget');
+                      setDeleteModalOpen(true);
+                      return;
+                    }
+                    if (isPotDeleteButton && potId) {
+                      setOpen(false);
+                      setDeleteType('pot');
+                      setDeleteModalOpen(true);
                       return;
                     }
                     if (isBudgetEditButton) {
                       setOpen(false);
-                      setShowEditModal(true);
+                      setShowEditBudgetModal(true);
+                      return;
+                    }
+                    if (isPotEditButton){
+                      setOpen(false);
+                      setShowEditPotModal(true);
                       return;
                     }
                     if (!isUsed && onChange) {
@@ -166,7 +190,7 @@ export default function DropdownButton({
                   className={clsx(
                     'cursor-pointer hover:bg-grey-100',
                     isUsed && 'pointer-events-none',
-                    isBudgetDeleteButton && 'text-red'
+                    (isBudgetDeleteButton || isPotDeleteButton) && 'text-red'
                   )}
                 >
                   <div
@@ -199,39 +223,42 @@ export default function DropdownButton({
         </div>
       </div>
 
-      <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)}>
-        <div className="flex flex-col gap-250 h-full">
-          <h2 className="text-preset-2 sm:!text-[32px] text-grey-900">{`Delete '${category}'`}</h2>
-          <p className="text-preset-4 text-grey-500">
-            Are you sure you want to delete this budget? This action cannot be reversed, and all the data inside it will be removed forever.
-          </p>
-          <div className="flex flex-col gap-250 !mt-auto sm:mt-0">
-            <button
-              onClick={handleDelete}
-              className="text-preset-4-bold text-red-600 w-full p-200 bg-red text-white rounded-xl hover:brightness-115 transition duration-250 cursor-pointer"
-            >
-              Yes, delete
-            </button>
-            <button
-              onClick={() => setModalOpen(false)}
-              className="text-preset-4 text-grey-500 hover:text-grey-900 transition duration-200 cursor-pointer"
-            >
-              No, Go Back
-            </button>
-          </div>
-        </div>
-      </Modal>
+      <DeleteConfirmationModal
+        isOpen={deleteModalOpen}
+        onClose={() => setDeleteModalOpen(false)}
+        onConfirm={handleDelete}
+        deleteType={deleteType}
+        label={deleteType === 'budget' ? category : potName}
+      />
 
-      {budget && showEditModal && (
-        <BudgetModal
+      
+      {
+        budget && 
+          <BudgetModal
+            mode="edit"
+            isOpen={showEditBudgetModal}
+            onClose={() => setShowEditBudgetModal(false)}
+            defaultValues={{
+              id: budgetId,
+              category: budget.category,
+              amount: budget.amount,
+              theme: budget.theme,
+            }}
+          />  
+      }
+    
+    
+
+      {pot && (
+        <PotModal
           mode="edit"
-          isOpen={showEditModal}
-          onClose={() => setShowEditModal(false)}
+          isOpen={showEditPotModal}
+          onClose={() => setShowEditPotModal(false)}
           defaultValues={{
-            id: budgetId,
-            category: budget.category,
-            amount: budget.amount,
-            theme: budget.theme,
+            id: potId,
+            name: pot.name,
+            amount: pot.amount,
+            theme: pot.theme,
           }}
         />
       )}
