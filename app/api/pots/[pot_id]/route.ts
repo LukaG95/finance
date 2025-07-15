@@ -24,13 +24,10 @@ export async function DELETE(request: Request, { params }: { params: Promise<{ p
   }
 }
 
-export async function PUT(
-  request: Request,
-  { params }: { params: { pot_id: string } }
-) {
+export async function PUT(request: Request, { params }: { params: Promise<{ pot_id: string }> }) {
   try {
     const db = client.db();
-    const { pot_id } = params;
+    const { pot_id } = await params;
 
     if (!ObjectId.isValid(pot_id)) {
       return NextResponse.json({ error: 'Invalid ID' }, { status: 400 });
