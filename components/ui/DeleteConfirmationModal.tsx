@@ -2,7 +2,7 @@
 
 import Modal from '@/components/ui/Modal';
 import { useState } from 'react';
-import { sleep } from '@/lib/sleep';
+import { sleep } from '@/lib/utils';
 
 interface DeleteConfirmationModalProps {
   isOpen: boolean;

@@ -17,9 +17,11 @@ export default function TransactionRow({ tx, isFirst, isLast }: Props) {
 
   return (
     <div
-      className={`grid sm:grid-cols-[3fr_1fr_1fr_80px] grid-cols-2 gap-y-2 items-center border-b border-grey-100 py-300 lg:px-200 ${
-        isFirst ? 'pt-0' : ''
-      } ${isLast ? 'pb-0 border-b-0' : ''}`}
+      className={`
+        grid sm:grid-cols-[3fr_1fr_1fr_80px] grid-cols-2 gap-y-2 items-center border-b border-grey-100 py-300 lg:px-200 
+        ${isFirst ? 'pt-0' : ''} 
+        ${isLast ? 'pb-0 border-b-0' : ''}
+      `}
     >
       {/* Sender + Category */}
       <div className="flex items-center gap-2 col-span-1">

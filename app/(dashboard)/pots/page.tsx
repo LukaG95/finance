@@ -1,5 +1,4 @@
 import Header from '@/components/layout/Header';
-import Card from '@/components/ui/Card';
 import { getCurrentUser } from '@/lib/data/getCurrentUser';
 import AddPotButton from '@/components/pots/AddPotButton';
 import { getPots } from '@/lib/data/getPots';
