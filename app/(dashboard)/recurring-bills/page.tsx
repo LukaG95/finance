@@ -119,7 +119,7 @@ export default async function RecurringBillsPage({ searchParams }: any ) {
               return (
                 <div key={bill._id.toString()} className="border-t border-grey-100">
                   {/* Mobile view (2 rows) */}
-                  <div className="flex flex-col gap-150 py-250 sm:hidden">
+                  <div className={`flex flex-col gap-150 py-250 sm:hidden ${isLast ? 'pb-0' : ''}`}>
                     {/* Row 1: Icon + Title */}
                     <div className="flex items-center gap-200">
                       <ImageFallback 
