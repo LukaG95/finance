@@ -85,7 +85,7 @@ export default async function RecurringBillsPage({ searchParams }: any ) {
         </div>
 
         {/* Bill List */}
-        <Card className="flex flex-col gap-300 h-max">
+        <Card className="flex flex-col gap-300 h-max !py-300 !px-250 sm:!p-400">
           <FilterBar
             search={{ placeholder: 'Search bills', queryKey: 'query' }}
             filters={[
@@ -103,7 +103,7 @@ export default async function RecurringBillsPage({ searchParams }: any ) {
 
           <div className="overflow-hidden rounded-[8px]">
             {/* Header */}
-            <div className="grid grid-cols-[5fr_1fr_100px] px-200 py-150 text-preset-5 text-grey-500 hidden sm:grid">
+            <div className="grid grid-cols-[5fr_1fr_100px] 1350:px-200 py-150 text-preset-5 text-grey-500 hidden sm:grid">
               <div>Bill Title</div>
               <div>Due Date</div>
               <div className="text-right">Amount</div>
@@ -119,7 +119,7 @@ export default async function RecurringBillsPage({ searchParams }: any ) {
               return (
                 <div key={bill._id.toString()} className="border-t border-grey-100">
                   {/* Mobile view (2 rows) */}
-                  <div className="flex flex-col gap-150 px-200 py-250 sm:hidden">
+                  <div className="flex flex-col gap-150 py-250 sm:hidden">
                     {/* Row 1: Icon + Title */}
                     <div className="flex items-center gap-200">
                       <ImageFallback 
@@ -161,7 +161,7 @@ export default async function RecurringBillsPage({ searchParams }: any ) {
                   </div>
 
                   {/* Desktop view (1 row with 3 columns) */}
-                  <div className={`hidden sm:grid grid-cols-[5fr_1fr_100px] items-center px-200 py-250 text-preset-4 hover:bg-beige-50 transition ${isLast ? 'pb-0' : ''}`}>
+                  <div className={`hidden sm:grid grid-cols-[5fr_1fr_100px] items-center 1350:px-200 py-250 text-preset-4 hover:bg-beige-50 transition ${isLast ? 'pb-0' : ''}`}>
                     <div className="flex items-center gap-200">
                       <ImageFallback 
                         src={`/images/avatars/${imageName}.jpg`} 
