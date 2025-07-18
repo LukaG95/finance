@@ -27,7 +27,7 @@ export default async function BudgetsPage() {
       </Header>
 
       <div className="grid grid-cols-1 1350:grid-cols-[428px_1fr] gap-300">
-        <Card className="h-fit !p-250 sm:!p-400 sm:!pb-300">
+        <Card className="flex flex-col sm:flex-row lg:!flex-col gap-500 sm:gap-200 lg:!gap-500 h-fit !p-250 sm:!p-400 sm:!pb-300">
           <DonutChart budgets={budgetSummaries} totalLimit={totalLimit} totalSpent={totalSpent}/>
           <SpendingSummaryList budgets={budgetSummaries} />
         </Card>

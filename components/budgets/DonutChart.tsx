@@ -8,9 +8,10 @@ interface Props {
   budgets: BudgetSummary[];
   totalSpent: number;
   totalLimit: number;
+  onOverviewPage?: boolean;
 }
 
-export default function DonutChart({ budgets, totalSpent, totalLimit }: Props) {
+export default function DonutChart({ budgets, totalSpent, totalLimit, onOverviewPage }: Props) {
   const data = budgets.map(budget => {
     return {
       name: budget.category,
@@ -20,7 +21,7 @@ export default function DonutChart({ budgets, totalSpent, totalLimit }: Props) {
   }).filter(d => d.value > 0);
 
   return (
-    <div className="relative flex flex-col items-center justify-center mb-400 py-250">
+    <div className="relative flex flex-col items-center justify-center py-250 w-full">
       <PieChart width={240} height={240}>
         {/* Inner ring */}
         <Pie
@@ -49,9 +50,10 @@ export default function DonutChart({ budgets, totalSpent, totalLimit }: Props) {
         </Pie>
       </PieChart>
       <div className="absolute text-center ">
-        <div className="text-preset-1 text-grey-900 underline underline-offset-7 mb-100">${totalSpent}</div>
-        <div className="text-preset-5 text-grey-500 underline underline-offset-3 decoration-grey-300">of ${totalLimit} limit</div>
+        <div className={`text-preset-1 text-grey-900 ${!onOverviewPage && 'underline'} underline-offset-7 mb-100`}>${totalSpent}</div>
+        <div className={`text-preset-5 text-grey-500 ${!onOverviewPage && 'underline'} underline-offset-3 decoration-grey-300`}>of ${totalLimit} limit</div>
       </div>
     </div>
+
   );
 }

@@ -22,5 +22,11 @@ export async function getTransactions(
   if (limit) cursor.limit(limit);
 
   const raw = await cursor.toArray();
-  return JSON.parse(JSON.stringify(raw));
+
+  const formatted = raw.map(tx => ({
+    ...tx,
+    date: new Date(tx.date).toLocaleDateString()
+  }));
+
+  return JSON.parse(JSON.stringify(formatted));
 }
