@@ -2,29 +2,25 @@ import Header from '@/components/layout/Header';
 import { getCurrentUser } from '@/lib/data/getCurrentUser';
 import Card from '@/components/ui/Card';
 import Image from 'next/image';
-import client from '@/lib/mongodb';
 import { formatCurrency } from '@/lib/utils';
 import FilterBar from '@/components/ui/FilterBar';
 import ImageFallback from '@/components/ui/ImageFallback';
 import { formatSuffix } from '@/lib/utils';
-import { getRecurringBillsSort } from '@/lib/utils';
+import { getBillsSortQuery } from '@/lib/utils';
+import { getBills } from '@/lib/data/getRecurringBills';
 
 export default async function RecurringBillsPage({ searchParams }: any ) {
   const user = await getCurrentUser();
   const resolvedParams = await searchParams;
-  const db = client.db();
   const sort = resolvedParams.sort;
-  const sortQuery = getRecurringBillsSort(sort);
+  const sortQuery = getBillsSortQuery(sort);
   const filter: any  = {userId: user._id };
   const query = resolvedParams.query?.toLowerCase();
    if (query) {
     const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // escape regex special chars
     filter.title = { $regex: escapedQuery, $options: 'i' }; // case insensitive
   }
-  const bills = await db.collection('recurring_bills')
-    .find(filter)
-    .sort(sortQuery)
-    .toArray();
+  const bills = await getBills(user._id, filter, sortQuery);
 
   const today = new Date().getDate();
 

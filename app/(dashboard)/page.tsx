@@ -6,16 +6,22 @@ import DonutChart from "@/components/budgets/DonutChart";
 import { getCurrentUser } from '@/lib/data/getCurrentUser';
 import { getTransactions } from '@/lib/data/getTransactions';
 import { getBudgets } from '@/lib/data/getBudgets';
+import { getPots } from "@/lib/data/getPots";
 import { getBudgetSummaries, getTotalSpentAndLimit } from '@/lib/data/getBudgetStats';
 import TransactionRows from "./transactions/TransactionRows";
 import Link from "next/link";
 import Image from "next/image";
 import SpendingSummaryList from "./budgets/SpendingSummaryList";
+import PotsCardContent from "./pots/PotsCardContent";
+import { getBills } from "@/lib/data/getRecurringBills";
+import BillsCardContent from "./recurring-bills/BillsCardContent";
 
 export default async function Dashboard() {
       const user = await getCurrentUser();
       const budgets = await getBudgets(user._id);
       const transactions = await getTransactions(user._id);
+      const pots = await getPots(user._id); 
+      const bills = await getBills(user._id);
     
       const budgetSummaries = getBudgetSummaries(budgets, transactions);
       const { totalSpent, totalLimit } = getTotalSpentAndLimit(budgetSummaries);
@@ -30,7 +36,7 @@ export default async function Dashboard() {
       <div className="grid grid-cols-1 md:grid-cols-[minmax(350px,3fr)_4fr] gap-300 items-start">
         <div className="flex flex-col gap-300">
           {/* Pots */}
-          <Card className={`!min-h-[218px]`}>
+          <Card className={`flex flex-col gap-250 px-250 py-300 sm:p-400`}>
             <div className="flex justify-between items-center">
               <h3 className="text-preset-2 text-grey-900">Pots</h3>
               <Link
@@ -41,6 +47,7 @@ export default async function Dashboard() {
                 <Image src="/images/icon-caret-right.svg" alt="icon" width={5} height={4} />
               </Link>
             </div>
+            <PotsCardContent pots={pots.slice(0, 4)}/>
           </Card>
           {/* Transactions */}
           <Card className="flex flex-col gap-400 px-250 py-300 sm:p-400">
@@ -77,7 +84,7 @@ export default async function Dashboard() {
           </Card>
 
             {/* Recurring Bills */}
-          <Card>
+          <Card className="flex flex-col gap-400 px-250 py-300 sm:p-400">
             <div className="flex justify-between items-center">
               <h3 className="text-preset-2 text-grey-900">Recurring Bills</h3>
               <Link
@@ -88,6 +95,7 @@ export default async function Dashboard() {
                 <Image src="/images/icon-caret-right.svg" alt="icon" width={5} height={4} />
               </Link>
             </div>
+            <BillsCardContent bills={bills} />
           </Card>
         </div>
       </div>

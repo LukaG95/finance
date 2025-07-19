@@ -51,6 +51,7 @@
 
   --breakpoint-lg: 1060px;
   --breakpoint-1350: 1350px;
+  --breakpoint-1570: 1570px;
 }
 
 @layer utilities {
