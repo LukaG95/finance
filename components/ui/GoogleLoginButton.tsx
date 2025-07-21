@@ -3,37 +3,22 @@
 import { signIn } from 'next-auth/react';
 import { useState } from 'react';
 
-export function GuestLoginButton() {
+export function GoogleLoginButton() {
   const [loading, setLoading] = useState(false);
 
-  async function handleGuestLogin() {
+  async function handleGoogleLogin() {
     setLoading(true);
-    try {
-      await signIn('credentials', {
-        email: 'rleague04@gmail.com',
-        password: '1234',
-        callbackUrl: '/?loginSuccess=1',
-      });
-    } catch (err) {
-      console.error('Guest login failed:', err);
-      setLoading(false);
-    }
+    await signIn('google', { callbackUrl: '/?loginSuccess=1' });
   }
 
   return (
     <button
       type="button"
-      onClick={handleGuestLogin}
+      onClick={handleGoogleLogin}
       disabled={loading}
-      className={`
-        bg-white text-grey-900 border border-grey-300 hover:bg-gray-100 
-        rounded-[8px] py-200 w-full text-preset-4-bold flex items-center justify-center
-        cursor-pointer
-        disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-white
-      `}
-
+      className="mb-100 bg-white text-grey-900 border border-grey-300 hover:bg-gray-100 rounded-[8px] py-200 w-full text-preset-4-bold flex items-center justify-center cursor-pointer"
     >
-      Continue as Guest
+      Login with Google
       {loading && (
         <svg
           className="animate-spin ml-2 h-4 w-4 text-grey-900"

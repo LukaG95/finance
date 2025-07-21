@@ -92,8 +92,8 @@ export default function DropdownButton({
         <button
           onClick={() => setOpen((prev) => !prev)}
           className={classNames(
-            'flex justify-between gap-200 px-250 rounded-[8px] text-preset-4 cursor-pointer hover:bg-grey-100 active:bg-grey-300 transition-bg duration-200 border-beige-500',
-            isModal ? 'py-[11px] border' : 'md:px-250 py-[14px] md:py-[11px] md:border',
+            'flex justify-between gap-200 px-150 rounded-[8px] text-preset-4 cursor-pointer hover:bg-grey-100 active:bg-grey-300 transition-bg duration-200 border-beige-500',
+            isModal ? 'py-[11px] border px-250' : 'md:px-250 py-[14px] md:py-[11px] md:border',
             isEllipsis && 'border-none !px-150 !py-150',
             buttonWidth
           )}
