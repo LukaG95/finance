@@ -72,7 +72,7 @@ export default async function BudgetCard({
           <Link
             href={{
               pathname: '/transactions',
-              query: { category }, // assuming `category` is in scope
+              query: { category }
             }}
             className="flex gap-200 text-preset-4 text-grey-500 cursor-pointer items-center"
           >

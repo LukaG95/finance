@@ -2,24 +2,7 @@ import { auth } from '@/lib/auth';
 import client from '@/lib/mongodb';
 import { redirect } from 'next/navigation';
 import TransactionTable from './TransactionTable';
-import type { SortDirection } from 'mongodb';
-
-const getSortOption = (sort: string | undefined): Record<string, SortDirection> => {
-  switch (sort) {
-    case 'Oldest':
-      return { date: 1 };
-    case 'A to Z':
-      return { sender: 1 };
-    case 'Z to A':
-      return { sender: -1 };
-    case 'Highest':
-      return { amount: -1 };
-    case 'Lowest':
-      return { amount: 1 };
-    default:
-      return { date: -1 };
-  }
-};
+import { getSortOption } from '@/lib/utils';
 
 export default async function TransactionTableWrapper({ searchParams }) {
   const session = await auth();
@@ -45,9 +28,9 @@ export default async function TransactionTableWrapper({ searchParams }) {
 
   if (selectedCategory !== 'All Transactions') filter.category = selectedCategory;
   if (query) {
-  const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // escape regex special chars
-  filter.sender = { $regex: escapedQuery, $options: 'i' }; // case insensitive
-}
+    const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // escape regex special chars
+    filter.sender = { $regex: escapedQuery, $options: 'i' }; // case insensitive
+  }
   
   const rawTransactions = await db
     .collection('transactions')
