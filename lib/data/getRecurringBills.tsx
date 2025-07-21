@@ -4,7 +4,7 @@ import { ObjectId } from 'mongodb';
 
 export async function getBills(userId: ObjectId, filter?, sortQuery? ) {
   const db = client.db(); 
-  console.log(sortQuery)
+
   const raw = await db.collection('recurring_bills')
     .find({userId: userId, ...filter })
     .sort(sortQuery)
