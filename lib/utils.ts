@@ -40,6 +40,6 @@ export const getBillsSortQuery = (sort: string | undefined): Record<string, Sort
     case 'Latest':
       return { dueDay: 1 };
     default:
-      return { dueDay: -1 };
+      return { dueDay: 1 };
   }
 };

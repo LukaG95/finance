@@ -21,7 +21,7 @@ export default function DonutChart({ budgets, totalSpent, totalLimit, onOverview
   }).filter(d => d.value > 0);
 
   return (
-    <div className="relative flex flex-col items-center justify-center py-250 w-full">
+    <div className="relative flex flex-col items-center justify-center pt-250 pb-250 sm:pb-[30px] w-full">
       <PieChart width={240} height={240}>
         {/* Inner ring */}
         <Pie

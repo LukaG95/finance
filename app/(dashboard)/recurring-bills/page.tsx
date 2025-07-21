@@ -14,7 +14,7 @@ export default async function RecurringBillsPage({ searchParams }: any ) {
   const resolvedParams = await searchParams;
   const sort = resolvedParams.sort;
   const sortQuery = getBillsSortQuery(sort);
-  const filter: any  = {userId: user._id };
+  const filter: any  = { userId: user._id };
   const query = resolvedParams.query?.toLowerCase();
    if (query) {
     const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // escape regex special chars

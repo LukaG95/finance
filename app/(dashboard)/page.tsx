@@ -17,22 +17,22 @@ import { getBills } from "@/lib/data/getRecurringBills";
 import BillsCardContent from "./recurring-bills/BillsCardContent";
 
 export default async function Dashboard() {
-      const user = await getCurrentUser();
-      const budgets = await getBudgets(user._id);
-      const transactions = await getTransactions(user._id);
-      const pots = await getPots(user._id); 
-      const bills = await getBills(user._id);
-    
-      const budgetSummaries = getBudgetSummaries(budgets, transactions);
-      const { totalSpent, totalLimit } = getTotalSpentAndLimit(budgetSummaries);
+  const user = await getCurrentUser();
+  const budgets = await getBudgets(user._id);
+  const transactions = await getTransactions(user._id);
+  const pots = await getPots(user._id); 
+  const bills = await getBills(user._id);
+
+  const budgetSummaries = getBudgetSummaries(budgets, transactions);
+  const { totalSpent, totalLimit } = getTotalSpentAndLimit(budgetSummaries);
 
   return (
-    <>
+    <div className="flex flex-col gap-400 pb-400">
       <Header>
         <h1 className='text-preset-1 text-grey-900'>Overview</h1>
         <LogoutButton />
       </Header>
-      <StatCards />
+      <StatCards bills={bills}/>
       <div className="grid grid-cols-1 md:grid-cols-[minmax(350px,3fr)_4fr] gap-300 items-start">
         <div className="flex flex-col gap-300">
           {/* Pots */}
@@ -100,6 +100,6 @@ export default async function Dashboard() {
         </div>
       </div>
 
-    </>
+    </div>
   );
 }
