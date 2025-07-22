@@ -10,7 +10,7 @@ export default function RegisterPage() {
     const name = formData.get('name') as string;
     const email = formData.get('email') as string;
     const password = formData.get('password') as string;
-
+ 
     const user = await getUser(email);
     if (!user) {
       console.log('User does not exist, creating...');

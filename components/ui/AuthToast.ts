@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { useSearchParams, usePathname, useRouter } from 'next/navigation';
 import { toast } from 'react-hot-toast';
 
-export default function GlobalToastHandler() {
+export default function AuthToast() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();

@@ -2,6 +2,7 @@ import "./styles/globals.css";
 import "./styles/variables.css";
 import { Toaster } from 'react-hot-toast';
 import AuthToast from '@/components/ui/AuthToast';
+import { Suspense } from 'react';
 
 export default function RootLayout({
   children,
@@ -16,7 +17,9 @@ export default function RootLayout({
       <body className='bg-beige-100 h-full'>
         {children}
         <Toaster position="top-center" />
-        <AuthToast />
+        <Suspense fallback={null}>
+          <AuthToast />
+        </Suspense>
       </body>
     </html>
   );
