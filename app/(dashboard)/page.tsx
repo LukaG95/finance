@@ -4,7 +4,7 @@ import OverviewContent from "@/components/overview/OverviewContent";
 import { Suspense } from "react";
 import OverviewSkeleton from "@/components/overview/OverviewSkeleton";
 
-export default async function Dashboard() {
+export default function Dashboard() {
 
   return (
     <div className="flex flex-col gap-400 pb-400">
