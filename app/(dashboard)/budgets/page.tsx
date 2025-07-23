@@ -11,8 +11,10 @@ import AddBudgetButton from '@/components/budgets/AddBudgetButton';
 
 export default async function BudgetsPage() {
   const user = await getCurrentUser();
-  const budgets = await getBudgets(user._id);
-  const transactions = await getTransactions(user._id);
+  const [budgets, transactions] = await Promise.all([
+    getBudgets(user._id),
+    getTransactions(user._id)
+  ]);
 
   const budgetSummaries = getBudgetSummaries(budgets, transactions);
   const { totalSpent, totalLimit } = getTotalSpentAndLimit(budgetSummaries);
