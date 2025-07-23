@@ -1,5 +1,5 @@
-import { MinimalBudget } from 'types/budget';
-import { MinimalTransaction } from "types/transaction";
+import { Budget } from 'types/budget';
+import { Transaction } from "types/transaction";
 import { BudgetSummary } from "types/budget";
 
 export function getTotalSpentAndLimit(budgetSummaries: BudgetSummary[]) {
@@ -13,8 +13,8 @@ export function getTotalSpentAndLimit(budgetSummaries: BudgetSummary[]) {
 }
 
 export function getBudgetSummaries(
-  budgets: MinimalBudget[],
-  transactions: MinimalTransaction[]
+  budgets: Budget[],
+  transactions: Transaction[]
 ): BudgetSummary[] {
   return budgets.map(budget => {
     const categoryTxs = transactions.filter(tx => tx.category === budget.category);

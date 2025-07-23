@@ -1,7 +1,7 @@
 import "./styles/globals.css";
 import "./styles/variables.css";
 import { Toaster } from 'react-hot-toast';
-import AuthToast from '@/components/ui/AuthToast';
+import AuthToast from '@/lib/AuthToast';
 import { Suspense } from 'react';
 import Sidebar from "@/components/layout/Sidebar";
 import DashboardLayout from "@/components/dashboard/DashboardLayout";

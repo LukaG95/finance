@@ -3,16 +3,7 @@
 import { useSearchParams, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import DropdownButton from './DropdownButton';
-
-type FilterConfig = {
-  label: string;
-  queryKey: string;
-  options: string[];
-  defaultValue?: string;
-  iconSrc?: string;
-  width?: string;
-  wrapperClassName?: string;
-};
+import { FilterConfig } from 'types/filters';
 
 type Props = {
   search?: {

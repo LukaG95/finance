@@ -2,14 +2,7 @@ import Pagination from '@/components/transactions/Pagination';
 import Card from '@/components/ui/Card';
 import FilterBar from '@/components/ui/FilterBar';
 import TransactionRows from './TransactionRows';
-
-type Transaction = {
-  _id: string;
-  sender: string;
-  category: string;
-  date: string;
-  amount: number;
-};
+import { Transaction } from 'types/transaction';
 
 type Props = {
   transactions: Transaction[];
@@ -44,6 +37,7 @@ const search = {
 };
 
 export default function TransactionTable({ transactions, currentPage, totalPages }: Props) {
+
   return (
     <Card className='flex flex-col px-250 py-300 md:p-400 gap-300'>
       <FilterBar search={search} filters={filters} />

@@ -16,7 +16,7 @@ export default async function BudgetCard({
   budget,
   userId
 }: Props) {
-  const { _id, category, theme, amount, spent } = budget;
+  const { category, theme, amount, spent } = budget;
   const remaining = Math.max(amount - spent, 0);
   const percentage = Math.min((spent / amount) * 100, 100);
 
@@ -35,7 +35,7 @@ export default async function BudgetCard({
           buttonWidth="w-full"
           wrapperClassName='!absolute right-150 sm:right-250'
           variant='ellipsis'
-          budget={{ budgetId: _id, category, theme, amount }}
+          budget={budget}
         />
       </div>
 

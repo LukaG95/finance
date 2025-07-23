@@ -1,8 +1,8 @@
 import Header from '@/components/layout/Header';
-import SpendingSummaryList from './SpendingSummaryList';
+import SpendingSummaryList from '../../../components/budgets/SpendingSummaryList';
 import Card from '@/components/ui/Card';
 import DonutChart from '@/components/budgets/DonutChart';
-import BudgetCard from './BudgetCard';
+import BudgetCard from '../../../components/budgets/BudgetCard';
 import { getCurrentUser } from '@/lib/data/getCurrentUser';
 import { getTransactions } from '@/lib/data/getTransactions';
 import { getBudgets } from '@/lib/data/getBudgets';

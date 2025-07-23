@@ -1,13 +1,6 @@
 import Image from "next/image";
 import { THEME_CLASSES } from "@/lib/constants";
-
-type Pot = {
-  _id: string;
-  name: string;
-  amount: number;
-  saved: number;
-  theme: string;
-};
+import { Pot } from "types/pot";
 
 interface Props {
   pots: Pot[];

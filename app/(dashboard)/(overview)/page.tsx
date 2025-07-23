@@ -6,13 +6,13 @@ import { getTransactions } from '@/lib/data/getTransactions';
 import { getBudgets } from '@/lib/data/getBudgets';
 import { getPots } from "@/lib/data/getPots";
 import { getBudgetSummaries, getTotalSpentAndLimit } from '@/lib/data/getBudgetStats';
-import TransactionRows from "@/app/(dashboard)/transactions/TransactionRows";
+import TransactionRows from "@/components/transactions/TransactionRows";
 import Link from "next/link";
 import Image from "next/image";
-import SpendingSummaryList from "@/app/(dashboard)/budgets/SpendingSummaryList";
-import PotsCardContent from "@/app/(dashboard)/pots/PotsCardContent";
+import SpendingSummaryList from "@/components/budgets/SpendingSummaryList";
+import PotsCardContent from "@/components/pots/PotsCardContent";
 import { getBills } from "@/lib/data/getRecurringBills";
-import BillsCardContent from "@/app/(dashboard)/recurring-bills/BillsCardContent";
+import BillsCardContent from "@/components/recurring-bills/BillsCardContent";
 import LogoutButton from "@/components/ui/LogoutButton";
 import Header from "@/components/layout/Header";
 

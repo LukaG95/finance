@@ -1,14 +1,13 @@
-import { Suspense } from 'react';
 import Header from '@/components/layout/Header';
-import Loading from '@/components/ui/Loading';
 import AddTransactionModal from '@/components/transactions/AddTransactionModal';
 import client from '@/lib/mongodb';
 import { getSortOption } from '@/lib/utils';
-import TransactionTable from './TransactionTable';
+import TransactionTable from '@/components/transactions/TransactionTable';
 import { getCurrentUser } from '@/lib/data/getCurrentUser';
+import { Transaction } from 'types/transaction';
 
 export default async function TransactionsPage({ searchParams }: { searchParams: any }) {
-   const user = await getCurrentUser();
+  const user = await getCurrentUser();
 
   const resolvedParams = await searchParams;
 
@@ -32,7 +31,7 @@ export default async function TransactionsPage({ searchParams }: { searchParams:
   
   const db = client.db();
   const rawTransactions = await db
-    .collection('transactions')
+    .collection<Transaction>('transactions')
     .find(filter)
     .sort(sortQuery)
     .skip(skip)
@@ -40,11 +39,9 @@ export default async function TransactionsPage({ searchParams }: { searchParams:
     .toArray();
 
   const transactions = rawTransactions.map(tx => ({
+    ...tx,
     _id: tx._id.toString(),
-    sender: tx.sender || 'Unknown',
-    category: tx.category || 'Uncategorized',
     date: new Date(tx.date).toLocaleDateString(),
-    amount: tx.amount ?? 0,
   }));
 
   const total = await db.collection('transactions').countDocuments(filter);
@@ -59,13 +56,12 @@ export default async function TransactionsPage({ searchParams }: { searchParams:
         </div>
       </Header>
 
-      <Suspense fallback={<Loading />}>
         <TransactionTable
           transactions={transactions}
           currentPage={page}
           totalPages={totalPages}
         />
-      </Suspense>
+
     </div>
   );
 }

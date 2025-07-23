@@ -1,12 +1,5 @@
 import TransactionRow from "./TransactionRow";
-
-type Transaction = {
-  _id: string;
-  sender: string;
-  category: string;
-  date: string;
-  amount: number;
-};
+import { Transaction } from "types/transaction";
 
 interface Props {
   transactions: Transaction[];

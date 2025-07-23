@@ -1,5 +1,5 @@
 import { ObjectId } from 'mongodb';
-import { MinimalTransaction } from './transaction';
+import { Transaction } from './transaction';
 
 export type Budget = {
   _id: string;
@@ -10,19 +10,8 @@ export type Budget = {
   createdAt: string;
 }; 
 
-export type MinimalBudget = {
-  _id: string;
-  category: string;
-  theme: string;
-  amount: number;
-};
-
-export type BudgetSummary = {
-  _id: string;
-  category: string;
-  theme: string;
-  amount: number;
+export interface BudgetSummary extends Budget {
   spent: number;
   remaining: number;
-  transactions: MinimalTransaction[];
-};
+  transactions: Transaction[];
+}

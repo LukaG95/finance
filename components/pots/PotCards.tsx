@@ -5,14 +5,7 @@ import Card from '@/components/ui/Card';
 import { THEME_CLASSES, THEME_HEX } from '@/lib/constants';
 import DropdownButton from '../ui/DropdownButton';
 import AddWithdrawModal from './AddWithdrawModal';
-
-type Pot = {
-  _id: string;
-  name: string;
-  amount: number;
-  saved: number;
-  theme: string;
-};
+import { Pot } from 'types/pot';
 
 export default function PotCards({ pots }: { pots: Pot[] }) {
   const [modalMode, setModalMode] = useState<'add' | 'withdraw' | null>(null);
@@ -44,7 +37,7 @@ export default function PotCards({ pots }: { pots: Pot[] }) {
                 buttonWidth="w-full"
                 wrapperClassName='!absolute right-150'
                 variant='ellipsis'
-                pot={{ potId: pot._id, name: pot.name, theme: pot.theme, amount: pot.amount }}
+                pot={pot}
               />
             </div>
 

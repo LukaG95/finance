@@ -1,13 +1,13 @@
 import React from 'react';
 import clsx from 'clsx';
 
-type CardProps = {
+type Props = {
   children?: React.ReactNode;
   className?: string;
   variant?: 'light' | 'dark'; 
 };
 
-export default function Card({ children, className = '', variant = 'light' }: CardProps) {
+export default function Card({ children, className = '', variant = 'light' }: Props) {
   return (
     <div
       className={clsx(

@@ -9,6 +9,8 @@ import { useRouter } from 'next/navigation';
 import PotModal from '../pots/PotModal';
 import BudgetModal from '@/components/budgets/BudgetModal';
 import DeleteConfirmationModal from './DeleteConfirmationModal';
+import { Pot } from 'types/pot';
+import { Budget } from 'types/budget';
 
 type Props = {
   label?: string;
@@ -23,8 +25,8 @@ type Props = {
   isBudgetCategory?: boolean;
   isBudgetTheme?: boolean;
   existingValues?: string[];
-  budget?: any;
-  pot?: any;
+  budget?: Budget;
+  pot?: Pot;
 };
 
 export default function DropdownButton({
@@ -60,9 +62,9 @@ export default function DropdownButton({
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const budgetId = budget?.budgetId;
+  const budgetId = budget?._id;
   const category = budget?.category;
-  const potId = pot?.potId;
+  const potId = pot?._id;
   const potName = pot?.name;
 
   const isDefault = variant === 'default';
@@ -238,12 +240,7 @@ export default function DropdownButton({
             mode="edit"
             isOpen={showEditBudgetModal}
             onClose={() => setShowEditBudgetModal(false)}
-            defaultValues={{
-              id: budgetId,
-              category: budget.category,
-              amount: budget.amount,
-              theme: budget.theme,
-            }}
+            defaultValues={budget}
           />  
       }
     
@@ -254,12 +251,7 @@ export default function DropdownButton({
           mode="edit"
           isOpen={showEditPotModal}
           onClose={() => setShowEditPotModal(false)}
-          defaultValues={{
-            id: potId,
-            name: pot.name,
-            amount: pot.amount,
-            theme: pot.theme,
-          }}
+          defaultValues={pot}
         />
       )}
     </div>
