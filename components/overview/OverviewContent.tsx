@@ -16,10 +16,12 @@ import BillsCardContent from "@/app/(dashboard)/recurring-bills/BillsCardContent
 
 export default async function OverviewContent() {
   const user = await getCurrentUser();
-  const budgets = await getBudgets(user._id);
-  const transactions = await getTransactions(user._id);
-  const pots = await getPots(user._id); 
-  const bills = await getBills(user._id);
+  const [budgets, transactions, pots, bills] = await Promise.all([
+    getBudgets(user._id),
+    getTransactions(user._id),
+    getPots(user._id),
+    getBills(user._id),
+  ]);
 
   const budgetSummaries = getBudgetSummaries(budgets, transactions);
   const { totalSpent, totalLimit } = getTotalSpentAndLimit(budgetSummaries);

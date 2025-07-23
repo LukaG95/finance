@@ -2,19 +2,13 @@ import { Suspense } from 'react';
 import Header from '@/components/layout/Header';
 import Loading from '@/components/ui/Loading';
 import AddTransactionModal from '@/components/transactions/AddTransactionModal';
-import { auth } from '@/lib/auth';
 import client from '@/lib/mongodb';
-import { redirect } from 'next/navigation';
 import { getSortOption } from '@/lib/utils';
 import TransactionTable from './TransactionTable';
+import { getCurrentUser } from '@/lib/data/getCurrentUser';
 
 export default async function TransactionsPage({ searchParams }: { searchParams: any }) {
-  const session = await auth();
-  if (!session?.user?.email) redirect('/login');
-
-  const db = client.db();
-  const user = await db.collection('users').findOne({ email: session.user.email });
-  if (!user?._id) redirect('/login');
+   const user = await getCurrentUser();
 
   const resolvedParams = await searchParams;
 
@@ -35,7 +29,8 @@ export default async function TransactionsPage({ searchParams }: { searchParams:
     const escapedQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     filter.sender = { $regex: escapedQuery, $options: 'i' };
   }
-
+  
+  const db = client.db();
   const rawTransactions = await db
     .collection('transactions')
     .find(filter)
