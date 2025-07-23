@@ -1,7 +1,7 @@
 import Header from "@/components/layout/Header";
 import Card from "@/components/ui/Card";
 
-export default async function BillsLoading() {
+export default function BillsLoading() {
   return (
     <div className="flex flex-col gap-400 pb-400">
       <Header>

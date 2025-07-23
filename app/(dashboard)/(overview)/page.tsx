@@ -13,21 +13,28 @@ import SpendingSummaryList from "@/app/(dashboard)/budgets/SpendingSummaryList";
 import PotsCardContent from "@/app/(dashboard)/pots/PotsCardContent";
 import { getBills } from "@/lib/data/getRecurringBills";
 import BillsCardContent from "@/app/(dashboard)/recurring-bills/BillsCardContent";
+import LogoutButton from "@/components/ui/LogoutButton";
+import Header from "@/components/layout/Header";
 
-export default async function OverviewContent() {
-  const user = await getCurrentUser();
-  const [budgets, transactions, pots, bills] = await Promise.all([
-    getBudgets(user._id),
-    getTransactions(user._id),
-    getPots(user._id),
-    getBills(user._id),
-  ]);
-
-  const budgetSummaries = getBudgetSummaries(budgets, transactions);
-  const { totalSpent, totalLimit } = getTotalSpentAndLimit(budgetSummaries);
+export default async function Dashboard() {
+    const user = await getCurrentUser();
+    const [budgets, transactions, pots, bills] = await Promise.all([
+      getBudgets(user._id),
+      getTransactions(user._id),
+      getPots(user._id),
+      getBills(user._id),
+    ]);
+  
+    const budgetSummaries = getBudgetSummaries(budgets, transactions);
+    const { totalSpent, totalLimit } = getTotalSpentAndLimit(budgetSummaries);
 
   return (
-    <>
+    <div className="flex flex-col gap-400 pb-400">
+      <Header>
+        <h1 className='text-preset-1 text-grey-900'>Overview</h1>
+        <LogoutButton />
+      </Header>
+
       <StatCards bills={bills}/>
       <div className="grid grid-cols-1 md:grid-cols-[minmax(350px,3fr)_4fr] gap-300 items-start">
         <div className="flex flex-col gap-300">
@@ -95,6 +102,7 @@ export default async function OverviewContent() {
           </Card>
         </div>
       </div>
-    </>
+
+    </div>
   );
 }

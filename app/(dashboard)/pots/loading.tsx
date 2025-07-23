@@ -2,7 +2,7 @@ import Header from '@/components/layout/Header';
 import AddPotButton from '@/components/pots/AddPotButton';
 import Card from '@/components/ui/Card';
 
-export default async function PotsLoading() {
+export default function PotsLoading() {
 
   return (
     <div className="flex flex-col gap-400 pb-400">

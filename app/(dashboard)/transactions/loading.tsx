@@ -2,7 +2,7 @@ import Header from "@/components/layout/Header";
 import AddTransactionModal from "@/components/transactions/AddTransactionModal";
 import Card from "@/components/ui/Card";
 
-export default async function TransactionsLoading() {
+export default function TransactionsLoading() {
   return (
     <div className='flex flex-col gap-400 pb-400'>
       <Header>

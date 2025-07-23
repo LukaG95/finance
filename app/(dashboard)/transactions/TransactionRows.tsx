@@ -1,4 +1,4 @@
-import TransactionRow from '@/app/(dashboard)/transactions/TransactionRow';
+import TransactionRow from "./TransactionRow";
 
 type Transaction = {
   _id: string;
