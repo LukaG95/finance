@@ -35,14 +35,17 @@ export default function FilterBar({ search, filters }: Props) {
       params.set(key, value);
     }
 
+    // when changing any filter set page back to 1
     if (key !== 'page') {
       params.set('page', '1');
     }
+    // if we change page scroll to top
+    else {
+      const container = document.getElementById('dashboard-scroll-container');
+      container?.scrollTo({ top: 0, behavior: 'smooth' });
+    }
 
     router.replace(`?${params.toString()}`, { scroll: false });
-
-    const container = document.getElementById('dashboard-scroll-container');
-    container?.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
