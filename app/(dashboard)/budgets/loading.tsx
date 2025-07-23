@@ -4,7 +4,7 @@ import Card from "@/components/ui/Card";
 
 export default function BudgetsLoading() {
   return (
-    <div className="flex flex-col gap-400 pb-400">
+    <div className="flex flex-col gap-400 py-300 lg:py-400">
       <Header>
         <h1 className="text-preset-1 text-grey-900">Budgets</h1>
         <div className="absolute right-0 bottom-0 flex gap-200 items-center h-full">
