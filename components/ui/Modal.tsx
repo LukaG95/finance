@@ -3,14 +3,14 @@
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 
-interface ModalProps {
+interface Props {
   isOpen: boolean;
   onClose: () => void;
   children: React.ReactNode;
   className?: string;
 }
 
-export default function Modal({ isOpen, onClose, children, className = '' }: ModalProps) {
+export default function Modal({ isOpen, onClose, children, className = '' }: Props) {
   const [shouldRender, setShouldRender] = useState(false);
 
   useEffect(() => {

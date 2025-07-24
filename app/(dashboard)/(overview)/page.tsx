@@ -1,6 +1,4 @@
 import StatCards from "@/components/dashboard/StatCards";
-import Header from "@/components/layout/Header";
-import LogoutButton from "@/components/ui/LogoutButton";
 import Card from "@/components/ui/Card";
 import DonutChart from "@/components/budgets/DonutChart";
 import { getCurrentUser } from '@/lib/data/getCurrentUser';
@@ -8,30 +6,35 @@ import { getTransactions } from '@/lib/data/getTransactions';
 import { getBudgets } from '@/lib/data/getBudgets';
 import { getPots } from "@/lib/data/getPots";
 import { getBudgetSummaries, getTotalSpentAndLimit } from '@/lib/data/getBudgetStats';
-import TransactionRows from "./transactions/TransactionRows";
+import TransactionRows from "@/components/transactions/TransactionRows";
 import Link from "next/link";
 import Image from "next/image";
-import SpendingSummaryList from "./budgets/SpendingSummaryList";
-import PotsCardContent from "./pots/PotsCardContent";
+import SpendingSummaryList from "@/components/budgets/SpendingSummaryList";
+import PotsCardContent from "@/components/pots/PotsCardContent";
 import { getBills } from "@/lib/data/getRecurringBills";
-import BillsCardContent from "./recurring-bills/BillsCardContent";
+import BillsCardContent from "@/components/recurring-bills/BillsCardContent";
+import LogoutButton from "@/components/ui/LogoutButton";
+import Header from "@/components/layout/Header";
 
 export default async function Dashboard() {
-  const user = await getCurrentUser();
-  const budgets = await getBudgets(user._id);
-  const transactions = await getTransactions(user._id);
-  const pots = await getPots(user._id); 
-  const bills = await getBills(user._id);
-
-  const budgetSummaries = getBudgetSummaries(budgets, transactions);
-  const { totalSpent, totalLimit } = getTotalSpentAndLimit(budgetSummaries);
+    const user = await getCurrentUser();
+    const [budgets, transactions, pots, bills] = await Promise.all([
+      getBudgets(user._id),
+      getTransactions(user._id),
+      getPots(user._id),
+      getBills(user._id),
+    ]);
+  
+    const budgetSummaries = getBudgetSummaries(budgets, transactions);
+    const { totalSpent, totalLimit } = getTotalSpentAndLimit(budgetSummaries);
 
   return (
-    <div className="flex flex-col gap-400 pb-400">
+    <div className="flex flex-col gap-400 py-300 lg:py-400">
       <Header>
         <h1 className='text-preset-1 text-grey-900'>Overview</h1>
         <LogoutButton />
       </Header>
+
       <StatCards bills={bills}/>
       <div className="grid grid-cols-1 md:grid-cols-[minmax(350px,3fr)_4fr] gap-300 items-start">
         <div className="flex flex-col gap-300">
@@ -83,7 +86,7 @@ export default async function Dashboard() {
             </div>
           </Card>
 
-            {/* Recurring Bills */}
+          {/* Recurring Bills */}
           <Card className="flex flex-col gap-400 px-250 py-300 sm:p-400">
             <div className="flex justify-between items-center">
               <h3 className="text-preset-2 text-grey-900">Recurring Bills</h3>

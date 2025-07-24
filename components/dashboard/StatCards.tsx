@@ -1,9 +1,7 @@
 import Card from "@/components/ui/Card";
 
 export default function StatCards({bills}: any) {
-  console.log(bills)
   const total = bills.reduce((sum, bill) => sum + bill.amount, 0);
-  console.log(total)
   return (
     <section className="flex flex-col md:flex-row gap-150 md:gap-300 ">
       <Card variant="dark" className="!p-250 md:!p-300">

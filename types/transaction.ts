@@ -1,21 +1,12 @@
 import { ObjectId } from 'mongodb';
 
 export type Transaction = {
-  _id: ObjectId;
+  _id: string;
   sender: string;
   sender_id: ObjectId | null;
   receiver_id: ObjectId | null;
   category: string;
-  date: Date;
+  date: string;
   amount: number;
   recurring: boolean;
 }; 
-
-export type MinimalTransaction = {
-  _id: string;
-  category: string;
-  amount: number;
-  sender: string;
-  name: string;
-  date: string;
-};

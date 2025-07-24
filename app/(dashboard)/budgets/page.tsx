@@ -1,8 +1,8 @@
 import Header from '@/components/layout/Header';
-import SpendingSummaryList from './SpendingSummaryList';
+import SpendingSummaryList from '../../../components/budgets/SpendingSummaryList';
 import Card from '@/components/ui/Card';
 import DonutChart from '@/components/budgets/DonutChart';
-import BudgetCard from './BudgetCard';
+import BudgetCard from '../../../components/budgets/BudgetCard';
 import { getCurrentUser } from '@/lib/data/getCurrentUser';
 import { getTransactions } from '@/lib/data/getTransactions';
 import { getBudgets } from '@/lib/data/getBudgets';
@@ -11,14 +11,16 @@ import AddBudgetButton from '@/components/budgets/AddBudgetButton';
 
 export default async function BudgetsPage() {
   const user = await getCurrentUser();
-  const budgets = await getBudgets(user._id);
-  const transactions = await getTransactions(user._id);
+  const [budgets, transactions] = await Promise.all([
+    getBudgets(user._id),
+    getTransactions(user._id)
+  ]);
 
   const budgetSummaries = getBudgetSummaries(budgets, transactions);
   const { totalSpent, totalLimit } = getTotalSpentAndLimit(budgetSummaries);
 
   return (
-    <div className="flex flex-col gap-400 pb-400">
+    <div className="flex flex-col gap-400 py-300 lg:py-400">
       <Header>
         <h1 className="text-preset-1 text-grey-900">Budgets</h1>
         <div className="absolute right-0 bottom-0 flex gap-200 items-center h-full">

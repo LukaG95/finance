@@ -6,6 +6,6 @@ export type Pot = {
   name: string;
   theme: string;
   amount: number;
-  saved?: number;
+  saved: number;
   createdAt: string;
 };

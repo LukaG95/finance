@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { Form } from '@/components/ui/Form';
 import { createUser, getUser } from '@/lib/mongodb';
 import { SubmitButton } from '@/components/ui/SubmitButton';
+import { redirect } from 'next/navigation';
 
 export default function RegisterPage() {
   async function register(formData: FormData) {
@@ -9,12 +10,14 @@ export default function RegisterPage() {
     const name = formData.get('name') as string;
     const email = formData.get('email') as string;
     const password = formData.get('password') as string;
-
+ 
     const user = await getUser(email);
     if (!user) {
+      console.log('User does not exist, creating...');
       await createUser(name, email, password); 
+      redirect('/login/?signUpSuccess=1');
     } else {
-      return 'User already exists';
+      redirect('/register/?signUpError=1');
     }
   }
 

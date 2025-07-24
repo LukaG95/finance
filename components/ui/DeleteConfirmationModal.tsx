@@ -4,12 +4,12 @@ import Modal from '@/components/ui/Modal';
 import { useState } from 'react';
 import { sleep } from '@/lib/utils';
 
-interface DeleteConfirmationModalProps {
+interface Props {
   isOpen: boolean;
   onClose: () => void;
   onConfirm: () => Promise<void>;
   deleteType: 'budget' | 'pot' | null;
-  label: string;
+  label: string | undefined;
 }
 
 export default function DeleteConfirmationModal({
@@ -18,7 +18,7 @@ export default function DeleteConfirmationModal({
   onConfirm,
   deleteType,
   label,
-}: DeleteConfirmationModalProps) {
+}: Props) {
   const [loading, setLoading] = useState(false);
 
   const handleDelete = async () => {

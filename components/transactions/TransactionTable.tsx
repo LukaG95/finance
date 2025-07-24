@@ -1,22 +1,14 @@
-import Pagination from '../../../components/transactions/Pagination';
+import Pagination from '@/components/transactions/Pagination';
 import Card from '@/components/ui/Card';
 import FilterBar from '@/components/ui/FilterBar';
 import TransactionRows from './TransactionRows';
+import { Transaction } from 'types/transaction';
 
-type Transaction = {
-  _id: string;
-  sender: string;
-  category: string;
-  date: string;
-  amount: number;
-};
-
-interface Props {
+type Props = {
   transactions: Transaction[];
-  total: number;
   currentPage: number;
-  perPage?: number;
-}
+  totalPages: number;
+};
 
 const filters = [
   {
@@ -44,8 +36,8 @@ const search = {
   queryKey: 'query'
 };
 
-export default function TransactionTable({ transactions, total, currentPage, perPage = 10 }: Props) {
-  const totalPages = Math.ceil(total / perPage);
+export default function TransactionTable({ transactions, currentPage, totalPages }: Props) {
+
   return (
     <Card className='flex flex-col px-250 py-300 md:p-400 gap-300'>
       <FilterBar search={search} filters={filters} />
@@ -56,9 +48,8 @@ export default function TransactionTable({ transactions, total, currentPage, per
         <span>Transaction Date</span>
         <span className="text-right">Amount</span>
       </div>
- 
-      <TransactionRows transactions={transactions}/>
 
+      <TransactionRows transactions={transactions} />
       <Pagination totalPages={totalPages} currentPage={currentPage} />
     </Card>
   );

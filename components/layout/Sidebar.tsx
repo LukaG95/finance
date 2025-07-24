@@ -75,7 +75,7 @@ export default function Sidebar() {
           showText={!collapsed}
           onClick={() => setCollapsed(!collapsed)}
           imageClassName={collapsed ? 'rotate-180' : 'rotate-0'}
-          extraMargin={'mb-300'}
+          extraMargin={'mb-100'}
         />
       </div>
 

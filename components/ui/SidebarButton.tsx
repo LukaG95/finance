@@ -1,4 +1,4 @@
-type SidebarButtonProps = {
+type Props = {
   height: string;
   width: string;
   iconPath: string;
@@ -21,7 +21,7 @@ export default function SidebarButton({
   imageClassName = '',
   extraMargin = '',
   active = false
-}: SidebarButtonProps) {
+}: Props) {
 
   return (
     <button

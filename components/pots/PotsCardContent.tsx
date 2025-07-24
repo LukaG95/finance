@@ -1,13 +1,6 @@
 import Image from "next/image";
 import { THEME_CLASSES } from "@/lib/constants";
-
-type Pot = {
-  _id: string;
-  name: string;
-  amount: number;
-  saved: number;
-  theme: string;
-};
+import { Pot } from "types/pot";
 
 interface Props {
   pots: Pot[];
@@ -15,7 +8,7 @@ interface Props {
 
 export default async function PotsCardContent({ pots }: Props) {
 
-  const total = pots.reduce((sum, pot) => sum + pot.amount, 0);
+  const total = pots.reduce((sum, pot) => sum + pot.saved, 0);
 
   return (
     <section className="flex flex-col 1570:flex-row gap-250">
@@ -35,7 +28,7 @@ export default async function PotsCardContent({ pots }: Props) {
                 <span className={`h-[43px] min-w-[4px] rounded-full ${themeColorClass}`} />
                 <div className={`flex flex-col justify-between items-center w-full items-start`}>
                   <span className={`text-preset-5 text-grey-500`}>{pot.name}</span>
-                  <span className={`text-preset-4-bold`}>${pot.amount.toFixed(2)}</span>
+                  <span className={`text-preset-4-bold`}>${pot.saved.toFixed(2)}</span>
                 </div>
               </li>
             )

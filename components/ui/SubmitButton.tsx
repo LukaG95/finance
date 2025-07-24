@@ -16,8 +16,15 @@ export function SubmitButton({
     <button
       type={pending ? 'button' : 'submit'}
       aria-disabled={pending}
-      className={`flex w-full items-center justify-center text-preset-4-bold bg-grey-900 text-white rounded-[8px] border py-200 ${className} cursor-pointer hover:bg-grey-850`}
+      disabled={pending}
+      className={`
+        flex w-full items-center justify-center text-preset-4-bold
+        bg-grey-900 text-white rounded-[8px] border py-200 ${className}
+        cursor-pointer hover:bg-grey-850
+        disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-grey-900
+      `}
     >
+
       {children}
       {pending && (
         <svg

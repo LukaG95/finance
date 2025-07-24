@@ -5,17 +5,13 @@ import { useRouter } from 'next/navigation';
 import { THEMES } from '@/lib/constants';
 import Modal from '@/components/ui/Modal';
 import DropdownButton from '../ui/DropdownButton';
+import { Pot } from 'types/pot';
 
 type Props = {
   isOpen: boolean;
   onClose: () => void;
   mode: 'add' | 'edit';
-  defaultValues?: {
-    name: string;
-    amount: number;
-    theme: string;
-    id?: string;
-  };
+  defaultValues?: Pot;
 };
 
 export default function PotModal({ isOpen, onClose, mode, defaultValues }: Props) {
@@ -35,8 +31,8 @@ export default function PotModal({ isOpen, onClose, mode, defaultValues }: Props
       amount: parseFloat(amount),
     };
 
-    if (mode === 'edit' && defaultValues?.id) {
-      await fetch(`/api/pots/${defaultValues.id}`, {
+    if (mode === 'edit' && defaultValues?._id) {
+      await fetch(`/api/pots/${defaultValues._id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),

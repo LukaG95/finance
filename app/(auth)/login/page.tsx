@@ -3,6 +3,7 @@ import { Form } from '@/components/ui/Form';
 import { signIn } from '@/lib/auth';
 import { redirect } from 'next/navigation';
 import { SubmitButton } from '@/components/ui/SubmitButton';
+import { GoogleLoginButton } from '@/components/ui/GoogleLoginButton';
 import { GuestLoginButton } from '@/components/ui/GuestLoginButton';
 
 export default function LoginPage() {
@@ -19,10 +20,11 @@ export default function LoginPage() {
     } catch (err) {
       console.error('Login error:', err);
       result.error = 'Login error';
+      redirect('/?loginError=1');
     }
 
     if (!result?.error) {
-      redirect('/');
+      redirect('/?loginSuccess=1');
     }
 
     return result?.error || 'Unknown error';
@@ -39,11 +41,10 @@ export default function LoginPage() {
       <form
         action={async () => {
           'use server';
-          await signIn('google', { callbackUrl: '/' });
+          await signIn('google', { callbackUrl: '/?loginSuccess=1' });
         }}
       >
-
-        <SubmitButton className="mb-100">Login with Google</SubmitButton>
+        <GoogleLoginButton  />
       </form>
 
       <GuestLoginButton />

@@ -33,7 +33,7 @@ export default async function RecurringBillsPage({ searchParams }: any ) {
   const dueSoonAmount = dueSoon.reduce((sum, b) => sum + b.amount, 0);
 
   return (
-    <div className="flex flex-col gap-400 pb-400">
+    <div className="flex flex-col gap-400 py-300 lg:py-400">
       <Header>
         <h1 className="text-preset-1 text-grey-900">Recurring Bills</h1>
       </Header>

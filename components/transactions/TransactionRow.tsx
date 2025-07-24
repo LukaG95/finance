@@ -1,13 +1,8 @@
-import ImageFallback from '../../../components/ui/ImageFallback';
+import ImageFallback from '@/components/ui/ImageFallback';
+import { Transaction } from 'types/transaction';
 
 type Props = {
-  tx: {
-    _id: string;
-    sender: string;
-    category: string;
-    date: string;
-    amount: number;
-  };
+  tx: Transaction;
   isFirst?: boolean;
   isLast?: boolean;
   onOverviewPage?: boolean;

@@ -1,11 +1,12 @@
 import client from '@/lib/mongodb';
 import { ObjectId } from 'mongodb';
-// import bill type
+import { Bill } from 'types/bill';
 
 export async function getBills(userId: ObjectId, filter?, sortQuery? ) {
   const db = client.db(); 
-  console.log(sortQuery)
-  const raw = await db.collection('recurring_bills')
+
+  const raw = await db
+    .collection<Bill>('recurring_bills')
     .find({userId: userId, ...filter })
     .sort(sortQuery)
     .toArray();

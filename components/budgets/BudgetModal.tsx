@@ -5,17 +5,13 @@ import { useRouter } from 'next/navigation';
 import { CATEGORIES, THEMES } from '@/lib/constants';
 import Modal from '@/components/ui/Modal';
 import DropdownButton from '../ui/DropdownButton';
+import { Budget } from 'types/budget';
 
 type Props = {
   isOpen: boolean;
   onClose: () => void;
   mode: 'add' | 'edit';
-  defaultValues?: {
-    category: string;
-    amount: number;
-    theme: string;
-    id?: string;
-  };
+  defaultValues?: Budget;
 };
 
 export default function BudgetModal({ isOpen, onClose, mode, defaultValues }: Props) {
@@ -36,8 +32,8 @@ export default function BudgetModal({ isOpen, onClose, mode, defaultValues }: Pr
       amount: parseFloat(amount),
     };
 
-    if (mode === 'edit' && defaultValues?.id) {
-      await fetch(`/api/budgets/${defaultValues.id}`, {
+    if (mode === 'edit' && defaultValues?._id) {
+      await fetch(`/api/budgets/${defaultValues._id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload),

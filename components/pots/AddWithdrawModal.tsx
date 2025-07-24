@@ -4,18 +4,13 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { THEME_HEX } from '@/lib/constants';
 import Modal from '@/components/ui/Modal';
+import { Pot } from 'types/pot';
 
 type Props = {
   isOpen: boolean;
   onClose: () => void;
   mode: 'add' | 'withdraw' | null;
-  pot: {
-    _id: string;
-    name: string;
-    amount: number;
-    saved: number;
-    theme: string;
-  };
+  pot: Pot;
 };
 
 export default function AddWithdrawModal({ isOpen, onClose, mode, pot }: Props) {
