@@ -86,7 +86,7 @@ export default async function Dashboard() {
             </div>
           </Card>
 
-            {/* Recurring Bills */}
+          {/* Recurring Bills */}
           <Card className="flex flex-col gap-400 px-250 py-300 sm:p-400">
             <div className="flex justify-between items-center">
               <h3 className="text-preset-2 text-grey-900">Recurring Bills</h3>

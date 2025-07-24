@@ -5,7 +5,6 @@ import { getSortOption } from '@/lib/utils';
 import TransactionTable from '@/components/transactions/TransactionTable';
 import { getCurrentUser } from '@/lib/data/getCurrentUser';
 import { Transaction } from 'types/transaction';
-import { sleep } from '@/lib/utils';
 
 export default async function TransactionsPage({ searchParams }: { searchParams: any }) {
   const user = await getCurrentUser();

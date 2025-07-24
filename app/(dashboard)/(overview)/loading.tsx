@@ -15,7 +15,7 @@ export default function OverviewLoading() {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-300">
         {/* Stat Cards */}
-        <Card className="p-400">
+        <Card className="p-400" variant="dark">
           <Skeleton width={100} height={20} />
           <Skeleton width={140} height={30} />
         </Card>

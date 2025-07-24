@@ -2,7 +2,6 @@
 
 import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
-import classNames from 'classnames';
 import clsx from 'clsx';
 import { THEME_CLASSES } from '@/lib/constants';
 import { useRouter } from 'next/navigation';
@@ -93,7 +92,7 @@ export default function DropdownButton({
       <div className={`relative ${isModal ? 'w-full' : 'w-max'}`}>
         <button
           onClick={() => setOpen((prev) => !prev)}
-          className={classNames(
+          className={clsx(
             'flex justify-between gap-200 px-150 rounded-[8px] text-preset-4 cursor-pointer hover:bg-grey-100 active:bg-grey-300 transition-bg duration-200 border-beige-500',
             isModal ? 'py-[11px] border px-250' : 'md:px-250 py-[14px] md:py-[11px] md:border',
             isEllipsis && 'border-none !px-150 !py-150',
@@ -130,7 +129,7 @@ export default function DropdownButton({
                 alt="toggle"
                 width={12}
                 height={6}
-                className={classNames(
+                className={clsx(
                   'transition-transform duration-200 md:block group-hover:brightness-300',
                   open ? 'rotate-180' : '',
                   !isModal && 'hidden'
@@ -141,7 +140,7 @@ export default function DropdownButton({
         </button>
 
         <div
-          className={classNames(
+          className={clsx(
             'absolute top-full right-0 mt-100 bg-white rounded-[8px] shadow-[0px_4px_24px_rgba(0,0,0,0.25)] max-h-[250px] sm:max-h-[300px] overflow-scroll transition-all duration-200 origin-top transform',
             open ? 'opacity-100 scale-100 pointer-events-auto' : 'opacity-0 scale-95 pointer-events-none',
             buttonWidth,
